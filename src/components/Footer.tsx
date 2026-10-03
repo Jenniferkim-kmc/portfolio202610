@@ -8,12 +8,20 @@ export default function Footer() {
         <p className="mt-4 max-w-2xl text-base leading-relaxed break-keep text-zinc-600 sm:text-lg">
           귀사와 함께하는 여정을 기대합니다.
         </p>
-        <a
-          href="mailto:950426kim@naver.com"
-          className="mt-6 inline-block text-lg font-medium transition-opacity hover:opacity-70 sm:text-xl"
-        >
-          950426kim@naver.com
-        </a>
+        <div className="mt-6 flex flex-col items-start gap-2">
+          <a
+            href="mailto:950426kim@naver.com"
+            className="text-lg font-medium transition-opacity hover:opacity-70 sm:text-xl"
+          >
+            950426kim@naver.com
+          </a>
+          <a
+            href="tel:010-5508-9646"
+            className="text-lg font-medium transition-opacity hover:opacity-70 sm:text-xl"
+          >
+            010-5508-9646
+          </a>
+        </div>
         <div className="mt-16 flex flex-col gap-4 border-t border-zinc-200 pt-8 text-xs text-zinc-500 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex gap-4">
             <a
@@ -21,14 +29,6 @@ export default function Footer() {
               className="transition-colors hover:text-black"
             >
               Email
-            </a>
-            <span>·</span>
-            <a href="#" className="transition-colors hover:text-black">
-              LinkedIn
-            </a>
-            <span>·</span>
-            <a href="#" className="transition-colors hover:text-black">
-              GitHub
             </a>
           </div>
           <p>© 2026 김유정 (Jennifer Kim). All rights reserved.</p>
