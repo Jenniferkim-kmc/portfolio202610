@@ -16,6 +16,8 @@ export type Screen = {
   height: number;
   alt: string;
   caption: string;
+  // 갤러리에서 번호 대신 보여줄 이름 (예: Before, After)
+  label?: string;
 };
 
 export type Table = {
@@ -68,6 +70,8 @@ export type Block = {
   // 블록 설명을 보여주는 화면: 개선 전·후 비교, 단일 화면
   screens?: { before: Screen; after: Screen };
   image?: Screen;
+  // 여러 화면을 순서대로 (모바일 화면은 가로로 나란히, 가로로 긴 화면은 위아래로)
+  gallery?: Screen[];
 };
 
 export type Detail = {
@@ -211,6 +215,44 @@ export const projects: Project[] = [
               ],
             },
           },
+          gallery: [
+            {
+              src: "/work/dispatch-automation/rider-list.png",
+              width: 375,
+              height: 815,
+              alt: "라이더 앱 잔여 배차 신청 화면. 날짜·회차·권역 필터와 공고 목록이 있고, 각 공고에 최대 보상 금액과 긴급·모집중·수기 공고 상태가 표시된다.",
+              caption: "공고 목록: 날짜·회차·지역별 공고와 최대 보상, 긴급 여부 확인",
+            },
+            {
+              src: "/work/dispatch-automation/rider-apply.png",
+              width: 375,
+              height: 798,
+              alt: "‘잔여 배차에 신청할까요?’ 바텀시트. 날짜, 시간, 지역, 픽업 유닛, 예상 물량, 예상 보상이 표시된다.",
+              caption: "신청 확인: 시간·픽업 유닛·예상 보상을 보고 신청",
+            },
+            {
+              src: "/work/dispatch-automation/rider-confirmed.png",
+              width: 375,
+              height: 798,
+              alt: "‘배차가 확정됐어요!’ 안내 팝업.",
+              caption: "자동 확정: 운영자 연락 없이 앱에서 바로 배차 확정 안내",
+            },
+            {
+              src: "/work/dispatch-automation/rider-closed.png",
+              width: 375,
+              height: 798,
+              alt: "‘이미 배차가 완료되었습니다’ 안내 팝업과 다른 공고 보기 버튼.",
+              caption: "미배차 안내: 자리가 마감되면 다른 공고로 바로 연결",
+            },
+          ],
+          image: {
+            src: "/work/dispatch-automation/admin-dispatch.png",
+            width: 1830,
+            height: 690,
+            alt: "운영 백오피스 배차 공고 목록. 상단에 공고 상태별 건수, 가운데 클러스터·회차·프로모션·예상 총보상이 담긴 공고 목록, 오른쪽에 선택한 공고의 일괄 편집 패널이 있다.",
+            caption:
+              "운영 백오피스 배차 공고 목록. 공고 상태(잔여·모집중·긴급·마감·수기공고)를 한눈에 보고, 선택한 공고의 단가·프로모션을 일괄 편집하며 Push 알림까지 한 화면에서 발송",
+          },
         },
         {
           heading: "2단계 · 블루 지역은 운송사 신청 + 운영자 승인으로 반자동화",
@@ -245,6 +287,36 @@ export const projects: Project[] = [
               ],
             },
           },
+          gallery: [
+            {
+              src: "/work/dispatch-automation/carrier-form.png",
+              width: 375,
+              height: 812,
+              alt: "운송사용 잔여배차 공고 등록 화면. 픽업 유닛, 신청 회차, 모집 인원, 예상 건수, 구인 요청 사유 입력란과 운영팀 승인 안내 문구가 있다.",
+              caption: "운송사 공고 등록: 회차·인원·예상 건수·사유만 입력, 단가·프로모션은 운영팀이 관리",
+            },
+            {
+              src: "/work/dispatch-automation/carrier-submitted.png",
+              width: 375,
+              height: 812,
+              alt: "공고 등록 완료 토스트. ‘PO 승인 후 라이더에게 노출됩니다’라는 문구가 표시된다.",
+              caption: "승인 게이트: 등록 후 운영팀 승인을 거쳐야 라이더에게 노출",
+            },
+            {
+              src: "/work/dispatch-automation/rider-carrier-post.png",
+              width: 375,
+              height: 812,
+              alt: "라이더 앱 잔여 배차 신청 목록. 운송사·수기공고·모집중 태그가 붙은 공고가 함께 표시된다.",
+              caption: "라이더 노출: 승인된 운송사 공고가 기존 잔여배차 목록에 함께 표시",
+            },
+            {
+              src: "/work/dispatch-automation/carrier-confirmed.png",
+              width: 375,
+              height: 812,
+              alt: "운송사 화면의 확정된 라이더 목록 바텀시트. 확정 인원 수와 라이더별 전화·메시지 버튼이 있다.",
+              caption: "확정 라이더 확인: 운송사가 앱에서 확정 인원을 보고 바로 연락",
+            },
+          ],
         },
       ],
       tradeoffs: [
@@ -287,7 +359,7 @@ export const projects: Project[] = [
     year: "2026",
     detail: {
       role: "서비스기획 (0→1 단독 설계)",
-      period: "2026.08 기획 · 2026.10.15 릴리즈",
+      period: "2026.08 — 2026.09.30 (2026.10.15 릴리즈)",
       scope: "라이더 앱(딜리래빗), 운영 어드민(백오피스), 관제 대시보드(TMS)",
       deliverables: "기능명세서 · 운영 정책 · 바이브코딩 동작 화면",
       metrics: [
@@ -405,6 +477,14 @@ export const projects: Project[] = [
         {
           heading: "결정 2 · 기존 당일배송 대신 별도 낮 회차를 만든다",
           body: "미배송 건을 기존 당일배송 회차에 태우는 방법도 있었지만, 그러려면 운영팀의 물품별 수기 절차를 매번 거쳐야 했습니다. 어차피 이 과정을 바꿔야 한다면, 미배송 건을 단순히 한 번 더 배송하는 데서 그치지 않기로 했습니다. 단가를 두 배로 높인 별도 낮 회차를 만들어 라이더에게 확실한 동기를 주었습니다. 목표는 미배송을 줄이는 것이 아니라 아예 없애는 것이었습니다.",
+          image: {
+            src: "/work/daytime-delivery/rider-job-detail.png",
+            width: 375,
+            height: 1160,
+            alt: "라이더 앱 낮배송 공고 상세 화면. 배송 정보(근무 가능 시간대 10:30~17:00, 건수), 배송 구역 지도, 보상 조건(건당 단가 5,000원, 낮배송 프로모션, 총 보상)이 표시된다.",
+            caption:
+              "라이더 앱 낮배송 공고 상세. 근무 가능 시간대(10:30~17:00)와 함께 건당 단가 5,000원, 낮배송 프로모션, 총 보상을 한 화면에 보여줘 신청 전에 받을 금액을 바로 확인",
+          },
         },
         {
           heading: "설계 1 · 재배송할 건을 사유별 기준으로 자동 선별한다",
@@ -413,6 +493,14 @@ export const projects: Project[] = [
             "자동 전환 5종: 출입 불가, 공동현관 비밀번호 미입력·불일치, 기상 악화, 고객 부재",
             "운영자 검토 8종: 고객 요청, 주소 불일치, 상품 파손·분실 등은 운영자가 건별로 판단해 전환",
           ],
+          image: {
+            src: "/work/daytime-delivery/admin-convert.png",
+            width: 1880,
+            height: 440,
+            alt: "운영 어드민 낮배송 전환 페이지. 상단에 11시 전환 마감 안내가 있고, 아래 표에 미배송 사유·유닛·섹터코드·전환 상태가 표시된다.",
+            caption:
+              "운영 어드민 낮배송 전환 페이지. 운영자 검토 대상(고객 요청·주소 불일치·분실 등)만 모아 보여주고, 11:00까지 전환해야 당일 낮배송에 포함된다는 기준을 화면 상단에 고정",
+          },
         },
         {
           heading: "설계 2 · 하루 타임라인을 시스템에 고정한다",
@@ -432,6 +520,36 @@ export const projects: Project[] = [
             "확정 후 1시간 안에 픽업하지 않으면 자동 취소 후 재공고",
             "증빙 없이 마감을 지키지 못하면 단계별 페널티 (1주 → 2주 → 영구 제한)",
           ],
+          gallery: [
+            {
+              src: "/work/daytime-delivery/rider-list.png",
+              width: 375,
+              height: 833,
+              alt: "라이더 앱 낮배송 공고 목록. 유닛·섹터별 공고에 최대 보상 금액과 예상 건수가 표시된다.",
+              caption: "공고 목록: 유닛·섹터별 공고와 최대 보상 금액 확인",
+            },
+            {
+              src: "/work/daytime-delivery/rider-accept.png",
+              width: 375,
+              height: 807,
+              alt: "낮배송 수락 확인 바텀시트. 픽업 유닛, 지역, 섹터코드, 건수, 픽업 필수 시간, 예상 보상이 표시된다.",
+              caption: "수락 확인: 건수·픽업 필수 시간·예상 보상을 보고 수락",
+            },
+            {
+              src: "/work/daytime-delivery/rider-confirmed.png",
+              width: 375,
+              height: 807,
+              alt: "‘배차가 확정됐어요!’ 안내 팝업.",
+              caption: "첫 신청: 심사 없이 바로 배차 확정",
+            },
+            {
+              src: "/work/daytime-delivery/rider-pending.png",
+              width: 375,
+              height: 807,
+              alt: "‘신청 완료’ 안내 팝업. 최대 5분 이내에 결과를 알려준다는 문구가 있다.",
+              caption: "추가 신청: 가용시간을 검사해 최대 5분 안에 결과 안내",
+            },
+          ],
         },
         {
           heading: "설계 4 · 운영 어드민과 관제 화면도 같은 기준으로 맞춘다",
@@ -440,6 +558,24 @@ export const projects: Project[] = [
             "운영 어드민: 낮배송 전환 페이지(자동 전환·전환 대기·전환 완료, 전환 이력)와 배차 관리 페이지(수기 공고 등록, 인원·프로모션 조정)",
             "수기 공고 등록 시 5가지 검증 조건과 사유별 오류 메시지를 정의해, 운영자가 원인을 따로 찾지 않아도 되도록 설계",
             "관제 대시보드(TMS): 배송 구분 필터를 고정 시간대가 아닌 물품의 실제 배송 유형 기준으로 바꾸고, 반납 진행 상태(반납 전·반납 중·반납 완료)를 보는 반납 탭 신설",
+          ],
+          gallery: [
+            {
+              src: "/work/daytime-delivery/admin-dispatch.png",
+              width: 1825,
+              height: 780,
+              alt: "운영 어드민 낮배송 배차 페이지. 상단에 공고 상태별 건수, 가운데 공고 목록, 오른쪽에 선택한 공고의 기본 정보·할당 정보·보상 조건이 표시된다.",
+              caption:
+                "운영 어드민 낮배송 배차 페이지. 공고 상태(잔여·모집중·마감·수기공고)를 한눈에 보고, 선택한 공고의 할당 라이더와 보상 조건을 확인하며 수기 공고 등록과 Push 알림 발송까지 한 화면에서 처리",
+            },
+            {
+              src: "/work/daytime-delivery/tms-return.png",
+              width: 1440,
+              height: 1060,
+              alt: "관제 대시보드(TMS) 반납 탭. 배송 형식 필터에 낮배송이 추가되고, 라이더별 반납전·반납중·반납완료 건수와 진행률, 선택한 라이더의 박스·운송장 목록이 표시된다.",
+              caption:
+                "관제 대시보드(TMS) 반납 탭. 배송 형식에 낮배송을 추가하고, 라이더별 반납 진행 상태(반납 전·반납 중·반납 완료)와 진행률을 한 화면에서 확인",
+            },
           ],
         },
       ],
@@ -581,8 +717,9 @@ export const projects: Project[] = [
             "텍스트 대신 3색 상태 버튼으로 출입 방식과 등록 상태를 구분 (비밀번호 있음 · 정보 없음 · 비밀번호 불필요)",
             "작은 링크 세 개로 흩어져 있던 이력 보기·수정·검색을 하나의 바텀시트로 통합",
           ],
-          screens: {
-            before: {
+          gallery: [
+            {
+              label: "Before",
               src: "/work/entrance-ux/before.png",
               width: 820,
               height: 828,
@@ -590,7 +727,8 @@ export const projects: Project[] = [
               caption:
                 "출입 정보가 고객 정보 아래 텍스트로 묻혀 있고, 이력 보기·수정·검색이 링크 세 개로 흩어져 있음",
             },
-            after: {
+            {
+              label: "After",
               src: "/work/entrance-ux/after.png",
               width: 346,
               height: 515,
@@ -598,15 +736,16 @@ export const projects: Project[] = [
               caption:
                 "출입 정보를 주소 바로 아래 상태 버튼으로 올리고, 정보가 없으면 노란색으로 표시해 ‘다른 방법 찾기’로 연결",
             },
-          },
-          image: {
-            src: "/work/entrance-ux/access-info.png",
-            width: 375,
-            height: 812,
-            alt: "출입 정보 바텀시트. 비밀번호 확인과 등록·수정 탭, 동 번호 검색창, 이 건물 출입정보 목록, 더보기 버튼, 다른 동 비밀번호 보기 버튼이 있다.",
-            caption:
-              "출입 정보 버튼을 누르면 열리는 바텀시트. 비밀번호 확인과 등록·수정을 탭으로 나누고, 같은 건물 이력과 다른 동 비밀번호를 한 화면에서 확인",
-          },
+            {
+              label: "After · 바텀시트",
+              src: "/work/entrance-ux/access-info.png",
+              width: 375,
+              height: 812,
+              alt: "출입 정보 바텀시트. 비밀번호 확인과 등록·수정 탭, 동 번호 검색창, 이 건물 출입정보 목록, 더보기 버튼, 다른 동 비밀번호 보기 버튼이 있다.",
+              caption:
+                "출입 정보 버튼을 누르면 열리는 바텀시트. 비밀번호 확인과 등록·수정을 탭으로 나누고, 같은 건물 이력과 다른 동 비밀번호를 한 화면에서 확인",
+            },
+          ],
         },
         {
           heading: "그래도 정보가 없을 때, 다음 행동을 안내했습니다",

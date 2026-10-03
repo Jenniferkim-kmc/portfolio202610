@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import ZoomableImage from "@/components/ZoomableImage";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Nav from "@/components/Nav";
@@ -96,16 +96,24 @@ function Blocks({ blocks }: { blocks: Block[] }) {
               />
             </div>
           )}
+          {block.gallery && <Gallery screens={block.gallery} />}
           {block.image && (
             <figure className="mt-2 flex flex-col gap-3">
               <div className="flex justify-center rounded-xl bg-zinc-100 p-5">
-                <Image
+                <ZoomableImage
                   src={block.image.src}
                   width={block.image.width}
                   height={block.image.height}
                   alt={block.image.alt}
-                  sizes="(min-width: 640px) 320px, 90vw"
-                  className="h-auto w-full max-w-[320px] rounded-lg shadow-sm"
+                  // 가로로 긴 화면(어드민 등)은 칸 너비를 다 쓰고, 모바일 화면은 폰 크기로
+                  sizes={
+                    block.image.width > block.image.height
+                      ? "(min-width: 640px) 672px, 90vw"
+                      : "(min-width: 640px) 320px, 90vw"
+                  }
+                  className={`mx-auto h-auto w-full rounded-lg shadow-sm ${
+                    block.image.width > block.image.height ? "" : "max-w-[320px]"
+                  }`}
                 />
               </div>
               <figcaption className="text-sm leading-relaxed break-keep text-zinc-500">
@@ -199,6 +207,90 @@ function FlowCompare({ flow }: { flow: Flow }) {
   );
 }
 
+// 개선 전·후 구분: 개선 전은 회색, 개선 후는 옅은 파란색 라벨과 칸
+function stageStyle(label?: string) {
+  if (label?.startsWith("After")) {
+    return {
+      chip: "bg-blue-100 text-blue-700",
+      frame: "bg-blue-50",
+    };
+  }
+  if (label?.startsWith("Before")) {
+    return { chip: "bg-zinc-200 text-zinc-600", frame: "bg-zinc-100" };
+  }
+  return { chip: "", frame: "bg-zinc-100" };
+}
+
+function StageLabel({ label }: { label: string }) {
+  const { chip } = stageStyle(label);
+  return chip ? (
+    <p
+      className={`self-start rounded-full px-2.5 py-0.5 text-xs font-semibold tracking-[0.1em] ${chip}`}
+    >
+      {label}
+    </p>
+  ) : (
+    <p className="text-xs font-medium tracking-[0.15em] text-zinc-500">
+      {label}
+    </p>
+  );
+}
+
+function Gallery({ screens }: { screens: Screen[] }) {
+  const isWide = screens.every((screen) => screen.width > screen.height);
+  // 모든 칸을 같은 크기로: 가장 세로로 긴 화면 비율에 맞추고, 나머지는 잘리지 않게 가운데 정렬
+  const frameRatio = Math.max(...screens.map((s) => s.height / s.width));
+  return (
+    <div
+      className={`mt-2 grid gap-6 ${
+        isWide
+          ? "grid-cols-1"
+          : screens.length === 3
+            ? "grid-cols-2 sm:grid-cols-3 sm:gap-4"
+            : "grid-cols-2 sm:grid-cols-4 sm:gap-4"
+      }`}
+    >
+      {screens.map((screen, i) => (
+        <figure key={screen.src} className="flex flex-col gap-3">
+          {!isWide && (
+            <StageLabel label={screen.label ?? String(i + 1).padStart(2, "0")} />
+          )}
+          {isWide ? (
+            <div className="rounded-xl bg-zinc-100 p-3">
+              <ZoomableImage
+                src={screen.src}
+                width={screen.width}
+                height={screen.height}
+                alt={screen.alt}
+                sizes="(min-width: 640px) 672px, 90vw"
+                className="h-auto w-full rounded-lg shadow-sm"
+              />
+            </div>
+          ) : (
+            <div
+              className={`rounded-xl p-3 ${stageStyle(screen.label).frame}`}
+              style={{ aspectRatio: `1 / ${frameRatio}` }}
+            >
+              <ZoomableImage
+                src={screen.src}
+                width={screen.width}
+                height={screen.height}
+                alt={screen.alt}
+                sizes="(min-width: 640px) 220px, 45vw"
+                buttonClassName="flex h-full w-full items-center justify-center"
+                className="h-auto max-h-full w-auto max-w-full rounded-lg object-contain shadow-sm"
+              />
+            </div>
+          )}
+          <figcaption className="text-sm leading-relaxed break-keep text-zinc-500">
+            {screen.caption}
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  );
+}
+
 function ScreenCompare({ before, after }: { before: Screen; after: Screen }) {
   return (
     <div className="grid gap-6 sm:grid-cols-2">
@@ -207,17 +299,17 @@ function ScreenCompare({ before, after }: { before: Screen; after: Screen }) {
         { label: "After", screen: after },
       ].map(({ label, screen }) => (
         <figure key={label} className="flex flex-col gap-3">
-          <p className="text-xs font-medium tracking-[0.15em] text-zinc-500">
-            {label}
-          </p>
-          <div className="flex flex-1 items-start justify-center rounded-xl bg-zinc-100 p-5">
-            <Image
+          <StageLabel label={label} />
+          <div
+            className={`flex flex-1 items-start justify-center rounded-xl p-5 ${stageStyle(label).frame}`}
+          >
+            <ZoomableImage
               src={screen.src}
               width={screen.width}
               height={screen.height}
               alt={screen.alt}
               sizes="(min-width: 640px) 320px, 90vw"
-              className="h-auto w-full max-w-[320px] rounded-lg shadow-sm"
+              className="mx-auto h-auto w-full max-w-[320px] rounded-lg shadow-sm"
             />
           </div>
           <figcaption className="text-sm leading-relaxed break-keep text-zinc-500">
