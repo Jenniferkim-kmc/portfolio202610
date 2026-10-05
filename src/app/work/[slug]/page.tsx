@@ -372,28 +372,30 @@ export default async function WorkDetail({
             ))}
           </dl>
 
-          <div
-            className={`mt-12 grid gap-4 ${
-              detail.metrics.length === 2 ? "sm:grid-cols-2" : "sm:grid-cols-3"
-            }`}
-          >
-            {detail.metrics.map((metric) => (
-              <div
-                key={metric.label}
-                className="flex flex-col rounded-xl border border-zinc-200 p-6"
-              >
-                <span className="self-start rounded-full bg-zinc-100 px-2 py-0.5 text-xs font-medium text-zinc-600">
-                  {metric.basis}
-                </span>
-                <p className="mt-4 text-3xl font-semibold tracking-tight">
-                  {metric.value}
-                </p>
-                <p className="mt-2 text-sm leading-relaxed break-keep text-zinc-500">
-                  {metric.label}
-                </p>
-              </div>
-            ))}
-          </div>
+          {detail.metrics.length > 0 && (
+            <div
+              className={`mt-12 grid gap-4 ${
+                detail.metrics.length === 2 ? "sm:grid-cols-2" : "sm:grid-cols-3"
+              }`}
+            >
+              {detail.metrics.map((metric) => (
+                <div
+                  key={metric.label}
+                  className="flex flex-col rounded-xl border border-zinc-200 p-6"
+                >
+                  <span className="self-start rounded-full bg-zinc-100 px-2 py-0.5 text-xs font-medium text-zinc-600">
+                    {metric.basis}
+                  </span>
+                  <p className="mt-4 text-3xl font-semibold tracking-tight">
+                    {metric.value}
+                  </p>
+                  <p className="mt-2 text-sm leading-relaxed break-keep text-zinc-500">
+                    {metric.label}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
 
           <div className="mt-20">
             <Section index="01" label="WHAT" title="무엇이 문제였나">

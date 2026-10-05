@@ -40,7 +40,10 @@ export default function Work() {
           SELECTED WORK
         </p>
         <ul className="mt-2 divide-y divide-zinc-200">
-          {projects.map((project) => (
+          {/* 서브 프로젝트는 대표 작업 대신 PROJECTS / INTERNSHIP에서 보여줌 */}
+          {projects
+            .filter((project) => project.tag !== "서브 프로젝트")
+            .map((project) => (
             <li key={project.slug}>
               {project.detail ? (
                 <Link

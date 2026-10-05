@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 type Detail = string | { text: string; sub: string[] };
 
 type Entry = {
@@ -7,6 +9,10 @@ type Entry = {
   tag?: string;
   summary?: string;
   details?: Detail[];
+  // 퇴사 사유처럼 짧게 덧붙이는 설명
+  note?: string;
+  // 상세 페이지가 있는 프로젝트
+  href?: string;
 };
 
 const experience: Entry[] = [
@@ -18,7 +24,7 @@ const experience: Entry[] = [
       "라스트마일 배송 플랫폼의 라이더·운송사·운영자 매칭 서비스 및 운영 시스템 기획",
     details: [
       {
-        text: "잔여배차 처리 자동화 기획으로 주말 운영팀 처리 시간 절감 (운영팀 추정 기준)",
+        text: "잔여배차 처리 자동화 기획으로 주말 운영팀 처리 시간 절감 (직접 측정 기준)",
         sub: [
           "1단계(2026.07) 화이트 지역(직접 운영): 구인 프로세스 6단계 → 4단계 축소. 지원자 확인·기사 개별 연락·수기 배차를 클러스터 기반 공고 자동 생성과 자동 확정으로 대체해 반자동화, 건당 약 10분 → 3분 이내로 단축 (약 70% 감소)",
           "2단계(2026.09) 블루 지역(운송사 운영): 클러스터가 없어 전 과정을 수기로 처리하던 지역에 운송사 직접 신청·운영자 승인 구조를 도입해 반자동화, 건당 약 10분 → 4분 이내로 단축 (약 60% 이상 감소)",
@@ -44,6 +50,7 @@ const experience: Entry[] = [
     period: "2026.03 — 2026.05",
     title: "애딥",
     meta: "Product Planning Center · Project Leader · 서비스기획",
+    note: "퇴사 사유: 투자 유치 실패에 따른 경영 악화",
     details: [
       "PiMS Partners 커머스 Admin 및 상품관리 시스템 기획 (상품 CRUD, 카테고리 구조, 노출 로직 설계)",
       "커머스 운영 모델(직판/벤더/공동구매) 및 거래·정산 구조 설계",
@@ -57,6 +64,7 @@ const experience: Entry[] = [
     period: "2024.11 — 2025.11",
     title: "로얼라이언스",
     meta: "기획팀 · 서비스기획",
+    note: "퇴사 사유: 매출 감소에 따른 경영 악화",
     details: [
       "부동산 거래 플랫폼 하우스딜 A-Z 기획 — 사용자 정의부터 서비스 구조, 화면 흐름, 운영 정책까지 단독 설계",
       "문제 정의 및 개선 방향 도출 — 시장 조사, 5WHYs, AS-IS / TO-BE 분석 기반으로 서비스 개선안 정리",
@@ -70,6 +78,7 @@ const experience: Entry[] = [
     period: "2022.09 — 2023.07",
     title: "비에스케이코퍼레이션",
     meta: "마케팅팀 · 마케팅기획",
+    note: "퇴사 사유: 서비스기획 직무 전환",
     details: [
       "프로젝트 리딩 — 2023.01 화이트머스크 프로모션 기획 (향수 카테고리 매출 18% 증가)",
       "제품 360도 관리 — 향수·기프트·액세서리 카테고리 판매 기획, 유통기한 임박 제품 프로모션 기획, 연/분기별 오더 수량 지정",
@@ -99,6 +108,17 @@ const projectWork: Entry[] = [
       "투표·랭킹·이벤트 흐름과 백오피스 구조 설계",
       "구매 플로우 개선으로 전환율 25% 이상 향상",
       "개발·디자인 협업 리드, 외부 파트너사 커뮤니케이션",
+    ],
+  },
+  {
+    period: "2023.11",
+    title: "야놀자 업셀링·크로스셀링 구매 퍼널 개선",
+    tag: "프로젝트",
+    meta: "패스트캠퍼스 PM 부트캠프 · 기획자 5명 팀",
+    href: "/work/yanolja-funnel",
+    details: [
+      "숙박 예약 흐름 안에 교통·레저 추천을 연결해 구매 흐름 재설계",
+      "254명 대상 프로토타입 A/B 테스트로 3개 카테고리 동시 인지율 55.1% → 75.4%",
     ],
   },
 ];
@@ -188,10 +208,22 @@ function Group({
                     : "text-lg font-semibold"
                 }`}
               >
-                {entry.title}
+                {entry.href ? (
+                  <Link
+                    href={entry.href}
+                    className="underline-offset-4 transition-opacity hover:underline hover:opacity-70"
+                  >
+                    {entry.title}
+                  </Link>
+                ) : (
+                  entry.title
+                )}
               </h3>
               {entry.meta && (
                 <p className="mt-1 text-sm text-zinc-400">{entry.meta}</p>
+              )}
+              {entry.note && (
+                <p className="mt-1 text-xs text-zinc-400">{entry.note}</p>
               )}
               {entry.summary && (
                 <p className="mt-3 text-base leading-relaxed font-medium break-keep text-zinc-800">
