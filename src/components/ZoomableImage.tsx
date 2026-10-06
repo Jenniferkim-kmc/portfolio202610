@@ -1,6 +1,7 @@
 "use client";
 
 import Image, { type ImageProps } from "next/image";
+import { sendGAEvent } from "@next/third-parties/google";
 import { useRef } from "react";
 
 type Props = Omit<ImageProps, "src" | "alt" | "width" | "height"> & {
@@ -25,7 +26,14 @@ export default function ZoomableImage({
     <>
       <button
         type="button"
-        onClick={() => dialogRef.current?.showModal()}
+        onClick={() => {
+          dialogRef.current?.showModal();
+          // GA4: 어떤 페이지의 어떤 사진을 크게 봤는지
+          sendGAEvent("event", "image_zoom", {
+            image: props.src,
+            page_path: window.location.pathname,
+          });
+        }}
         className={`cursor-zoom-in ${buttonClassName}`}
         aria-label={`${alt} 크게 보기`}
       >
