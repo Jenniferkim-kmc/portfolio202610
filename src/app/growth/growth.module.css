@@ -1,0 +1,426 @@
+/* 그로스 포트폴리오(/growth) — 스위스 타이포 스타일 (Squarespace "Reseda" 참고).
+   아이보리 바탕, 검정 한 색, 굵은 이름 워드마크, 가는 선으로 나눈 구획.
+   본문은 최대 1152px 폭 안에 두고, 배경과 선만 화면 끝까지 이어짐 */
+.root {
+  --bg: #f5f4f0;
+  --ink: #232322;
+  --soft: #6b6a66;
+  /* 좌우 여백: 넓은 화면에서는 콘텐츠 폭을 1152px로 고정 */
+  --m: max(24px, calc((100% - 1152px) / 2));
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-pretendard), system-ui, sans-serif;
+  word-break: keep-all;
+}
+
+.root a {
+  color: inherit;
+}
+
+.top {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 26px var(--m);
+  background: var(--bg);
+  border-bottom: 1px solid var(--ink);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+
+.top nav {
+  display: flex;
+  gap: 24px;
+}
+
+.top a {
+  text-decoration: none;
+}
+
+.top nav a:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* 이름 워드마크 */
+.wordmark {
+  margin: 0;
+  padding: clamp(32px, 4vw, 56px) var(--m) 0;
+  font-weight: 900;
+  font-size: min(14.2vw, 176px);
+  line-height: 0.9;
+  letter-spacing: -0.055em;
+  white-space: nowrap;
+}
+
+.lead {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(24px, 4vw, 64px);
+  padding: clamp(32px, 3vw, 48px) var(--m) clamp(56px, 6vw, 96px);
+}
+
+.leadPic {
+  margin: 0;
+  background: #e8e6e0;
+}
+
+.leadPic img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.leadText {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.statement {
+  margin: 0;
+  font-weight: 800;
+  font-size: clamp(24px, 2.2vw, 34px);
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+}
+
+.body {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.65;
+  max-width: 30em;
+}
+
+.outline {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 28px;
+  padding: 14px 20px;
+  border: 1px solid var(--ink);
+  font-size: 14px;
+  text-decoration: none;
+  transition: background-color 160ms, color 160ms;
+}
+
+.outline:hover {
+  background: var(--ink);
+  color: var(--bg) !important;
+}
+
+.rule {
+  border: 0;
+  border-top: 1px solid var(--ink);
+  margin: 0 var(--m);
+}
+
+/* 섹션 공통 */
+.section {
+  padding: clamp(56px, 6vw, 96px) var(--m);
+}
+
+.h2 {
+  margin: 0 0 clamp(40px, 4vw, 64px);
+  font-weight: 900;
+  font-size: clamp(32px, 3.8vw, 60px);
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+}
+
+/* 작업: 한 줄에 한 프로젝트 */
+.work {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: clamp(24px, 4vw, 64px);
+  padding: clamp(32px, 3vw, 48px) 0;
+  border-top: 1px solid var(--ink);
+  text-decoration: none;
+}
+
+.work:nth-of-type(even) .workPics {
+  order: -1;
+}
+
+.workText {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.workKicker {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--soft);
+}
+
+.workTitle {
+  margin: 0;
+  font-weight: 800;
+  font-size: clamp(21px, 2vw, 30px);
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+}
+
+.workText p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.metric {
+  margin-top: auto;
+  font-weight: 900;
+  font-size: clamp(42px, 4.6vw, 72px);
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+}
+
+.metric small {
+  display: block;
+  margin-top: 10px;
+  font-weight: 400;
+  font-size: 13px;
+  letter-spacing: 0;
+  color: var(--soft);
+}
+
+.more {
+  font-size: 14px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* 프로젝트 이미지 칸: 배경 박스 없이 16:10 영역 안에 같은 종류 이미지 2장, 잘리지 않게 */
+.workPics {
+  position: relative;
+  /* 옆 글 블록 높이에 맞춰 늘어남 */
+  /* 모든 프로젝트 줄의 높이를 같게: 사진 영역 높이 고정 */
+  height: clamp(320px, 31vw, 420px);
+}
+
+.pic {
+  margin: 0;
+}
+
+.pic img {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #fff;
+  transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.pic figcaption {
+  margin-bottom: 8px;
+  font-size: 13px;
+  color: var(--soft);
+}
+
+/* 데스크톱 화면 2장: 왼쪽 위 → 오른쪽 아래로 엇갈려 흐름이 보이게 */
+.desktop .pic {
+  position: absolute;
+  width: 80%;
+}
+
+.desktop .pic:first-child {
+  left: 0;
+  top: 0;
+}
+
+.desktop .pic:last-child {
+  right: 0;
+  bottom: 0;
+}
+
+.desktop .pic img {
+  outline: 1px solid rgb(35 35 34 / 0.12);
+}
+
+/* 폰 화면 2장: 같은 높이로 나란히 */
+.phone {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6%;
+}
+
+.phone .pic {
+  height: 100%;
+}
+
+.phone .pic img {
+  width: auto;
+  height: 100%;
+  border-radius: 14px;
+  outline: 1px solid rgb(35 35 34 / 0.12);
+}
+
+/* 카드 2장(개선 전 → 개선 후): 같은 너비로 나란히 */
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 6%;
+}
+
+.card .pic {
+  width: 44%;
+}
+
+.card .pic img {
+  border-radius: 12px;
+  outline: 1px solid rgb(35 35 34 / 0.12);
+}
+
+.work:hover .pic img {
+  transform: translateY(-4px);
+}
+
+/* 경력: 묶음마다 큰 제목, 줄마다 왼쪽 기간 · 오른쪽 내용 */
+.careerGroup + .careerGroup {
+  margin-top: clamp(64px, 7vw, 112px);
+}
+
+.careerList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-bottom: 1px solid var(--ink);
+}
+
+.careerRow {
+  display: grid;
+  grid-template-columns: 28% 1fr;
+  gap: 24px;
+  padding: 24px 0;
+  border-top: 1px solid var(--ink);
+}
+
+.careerWhen {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 14px;
+  color: var(--soft);
+  font-variant-numeric: tabular-nums;
+}
+
+.careerTitle {
+  margin: 0;
+  font-weight: 800;
+  font-size: 17px;
+  letter-spacing: -0.02em;
+}
+
+.careerTitle a {
+  text-underline-offset: 4px;
+}
+
+.careerMeta,
+.careerNote {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: var(--soft);
+}
+
+.careerSummary {
+  margin: 12px 0 0;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.careerDetails {
+  margin: 12px 0 0;
+  padding-left: 1.1em;
+  list-style: circle;
+  display: grid;
+  gap: 8px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.careerDetails strong {
+  font-weight: 600;
+}
+
+.careerDetails ul {
+  margin: 6px 0 0;
+  padding-left: 1.1em;
+  display: grid;
+  gap: 4px;
+  font-size: 13px;
+  color: var(--soft);
+  list-style: circle;
+}
+
+/* 연락 */
+.contact {
+  padding: clamp(64px, 7vw, 112px) var(--m) 40px;
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.contactBig {
+  margin: 0;
+  font-weight: 900;
+  font-size: clamp(44px, 8vw, 112px);
+  line-height: 0.9;
+  letter-spacing: -0.055em;
+}
+
+.contactRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 48px;
+  font-size: clamp(17px, 1.6vw, 22px);
+  font-weight: 600;
+}
+
+.contactRow a {
+  text-decoration: none;
+}
+
+.contactRow a:hover {
+  text-decoration: underline;
+}
+
+.copy {
+  margin: 64px 0 0;
+  font-size: 13px;
+  opacity: 0.7;
+}
+
+@media (max-width: 760px) {
+  .top nav {
+    display: none;
+  }
+
+  .wordmark {
+    white-space: normal;
+    font-size: 19vw;
+  }
+
+  .lead,
+  .work {
+    grid-template-columns: 1fr;
+  }
+
+  .work:nth-of-type(even) .workPics {
+    order: 0;
+  }
+
+  .careerRow {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}

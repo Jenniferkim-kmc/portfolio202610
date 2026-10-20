@@ -1,8 +1,8 @@
 import Link from "next/link";
 
-type Detail = string | { text: string; sub: string[] };
+export type Detail = string | { text: string; sub: string[] };
 
-type Entry = {
+export type Entry = {
   period: string;
   title: string;
   meta?: string;
@@ -15,9 +15,9 @@ type Entry = {
   href?: string;
 };
 
-const experience: Entry[] = [
+export const experience: Entry[] = [
   {
-    period: "2026.06 — 재직중",
+    period: "2026.06 — 2026.10",
     title: "딜리버스",
     meta: "라스트마일 인텔리전스 기획팀 · 서비스기획",
     summary:
@@ -89,7 +89,7 @@ const experience: Entry[] = [
   },
 ];
 
-const projectWork: Entry[] = [
+export const projectWork: Entry[] = [
   {
     period: "2024.08 — 2024.11",
     title: "시니어 AI 컨시어지 서비스 기획 (딸래미)",
@@ -123,7 +123,7 @@ const projectWork: Entry[] = [
   },
 ];
 
-const internship: Entry[] = [
+export const internship: Entry[] = [
   {
     period: "2022.05 — 2022.08",
     title: "더블유더블유디코리아",
@@ -136,7 +136,7 @@ const internship: Entry[] = [
   },
 ];
 
-const education: Entry[] = [
+export const education: Entry[] = [
   {
     period: "2023.08 — 2024.01",
     title: "야놀자 X 패스트캠퍼스 PM 부트캠프",
@@ -154,7 +154,7 @@ const education: Entry[] = [
   },
 ];
 
-const certifications: Entry[] = [
+export const certifications: Entry[] = [
   { period: "2024.03", title: "TOEIC", meta: "875점" },
   { period: "2024.03", title: "OPIc", meta: "Advanced Low" },
   {

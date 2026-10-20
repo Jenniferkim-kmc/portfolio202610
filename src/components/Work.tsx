@@ -32,22 +32,36 @@ function ProjectRow({ project }: { project: Project }) {
   );
 }
 
-export default function Work() {
+// list·basePath를 넘기면 그로스 포트폴리오처럼 다른 프로젝트 목록을 보여줌
+// showSubProjects: 서브 프로젝트도 목록 맨 아래에 보여줌 (기본 포트폴리오는 숨기고 PROJECTS / INTERNSHIP에서 보여줌)
+export default function Work({
+  list = projects,
+  basePath = "",
+  showSubProjects = false,
+}: {
+  list?: Project[];
+  basePath?: string;
+  showSubProjects?: boolean;
+}) {
+  const isSub = (project: Project) => project.tag === "서브 프로젝트";
+  const shown = showSubProjects
+    ? [...list.filter((p) => !isSub(p)), ...list.filter(isSub)]
+    : list.filter((p) => !isSub(p));
   return (
     <section id="work" className="border-b border-zinc-200">
       <div className="mx-auto max-w-6xl px-6 py-24 sm:px-12 lg:px-20">
         <p className="text-xs font-medium tracking-[0.2em] text-zinc-400">
           SELECTED WORK
         </p>
+        {list.length === 0 && (
+          <p className="mt-6 text-base text-zinc-400">프로젝트를 준비하고 있습니다.</p>
+        )}
         <ul className="mt-2 divide-y divide-zinc-200">
-          {/* 서브 프로젝트는 대표 작업 대신 PROJECTS / INTERNSHIP에서 보여줌 */}
-          {projects
-            .filter((project) => project.tag !== "서브 프로젝트")
-            .map((project) => (
+          {shown.map((project) => (
             <li key={project.slug}>
               {project.detail ? (
                 <Link
-                  href={`/work/${project.slug}`}
+                  href={`${basePath}/work/${project.slug}`}
                   className="group flex items-center justify-between py-8"
                 >
                   <ProjectRow project={project} />

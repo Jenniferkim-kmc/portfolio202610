@@ -42,3 +42,6 @@ next-env.d.ts
 
 .vercel
 .env*
+
+# taste-skill 작업 파일
+.taste-skill/

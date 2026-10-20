@@ -4,6 +4,7 @@ import Work from "@/components/Work";
 import Experience from "@/components/Experience";
 import About from "@/components/About";
 import Footer from "@/components/Footer";
+import { allProjects } from "@/data/allProjects";
 
 export default function Home() {
   return (
@@ -12,7 +13,7 @@ export default function Home() {
       <main className="flex-1">
         <Hero />
         <About />
-        <Work />
+        <Work list={allProjects} />
         <Experience />
       </main>
       <Footer />
