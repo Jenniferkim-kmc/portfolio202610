@@ -25,19 +25,19 @@ type Pic = { src: string; width: number; height: number; alt: string };
 // 프로젝트 소개: 라벨, 한 줄 제목, 핵심 포인트, 대표 화면 (각 케이스 스터디 내용 기준)
 const features: Record<string, { badge: string; title: string[]; points: string[]; pics: Pic[]; tint: boolean }> = {
   "pims-partners": {
-    badge: "활성화 · 전환",
-    title: ["등록에서 멈추던 파트너를", "광고까지 이어지게"],
+    badge: "0→1 · 1인 기획",
+    title: ["상품 등록부터 결제·정산까지", "파트너 어드민을 혼자 설계"],
     points: [
-      "처음 3회만 뜨는 기능 가이드로 핵심 기능을 먼저 익히게 설계",
-      "상품 등록 직후 광고 효과를 보여주고 광고 등록으로 바로 연결",
-      "AI·바이브코딩으로 기획부터 프론트까지 3주 → 1주",
+      "상품 등록·조회·재고·승인 관리의 화면과 정책(상품 CRUD·카테고리·노출 로직) 설계",
+      "RBAC 기반 운영자 권한 구조와 직판·벤더·공동구매별 결제·정산 구조 설계",
+      "첫 방문 가이드와 등록 직후 광고 연결로 활성화 흐름까지, AI로 기획~프론트 3주 → 1주",
     ],
     pics: [
       {
-        src: "/work/pims/screen-register-complete.png",
-        width: 2453,
-        height: 1415,
-        alt: "PiMS Partners 상품 등록 완료 모달. 등록한 상품과 광고 효과 세 가지, 광고 등록하기 버튼이 있다.",
+        src: "/work/pims/screen-product-list.png",
+        width: 2801,
+        height: 1723,
+        alt: "PiMS Partners 상품 조회 화면. 상품명 검색, 상태·분류 필터, 판매가·판매건수·총매출·재고수량·노출 토글·판매 상태가 있는 상품 목록.",
       },
     ],
     tint: true,
