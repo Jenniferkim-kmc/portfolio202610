@@ -296,14 +296,21 @@ function ScreenCompare({ before, after }: { before: Screen; after: Screen }) {
 }
 
 // 프로젝트 상세 페이지 본문. 기본 포트폴리오(basePath "")와 그로스 포트폴리오(basePath "/growth")가 함께 사용
+// nav·footer를 넘기면 기본 상단·하단 대신 사용하고, aside는 회고 다음에 붙임 (쿠팡 포트폴리오용)
 export default function CaseStudy({
   project,
   caseStudies,
   basePath = "",
+  nav,
+  footer,
+  aside,
 }: {
   project: Project & { detail: Detail };
   caseStudies: Project[];
   basePath?: string;
+  nav?: React.ReactNode;
+  footer?: React.ReactNode;
+  aside?: React.ReactNode;
 }) {
   const { detail } = project;
   const homeHref = basePath || "/";
@@ -312,8 +319,8 @@ export default function CaseStudy({
 
   return (
     <div className="flex flex-1 flex-col bg-white text-zinc-900">
-      <Nav basePath={basePath} />
-      <main className="flex-1">
+      {nav ?? <Nav basePath={basePath} />}
+      <main id="main" className="flex-1">
         <article className="mx-auto max-w-6xl px-6 py-16 sm:px-12 sm:py-24 lg:px-20">
           <Link
             href={`${homeHref}#work`}
@@ -418,6 +425,8 @@ export default function CaseStudy({
             </Section>
           </div>
 
+          {aside}
+
           {next && next.slug !== project.slug && (
             <Link
               href={`${basePath}/work/${next.slug}`}
@@ -433,7 +442,7 @@ export default function CaseStudy({
           )}
         </article>
       </main>
-      <Footer />
+      {footer ?? <Footer />}
     </div>
   );
 }
