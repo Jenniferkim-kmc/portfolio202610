@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Badge from "@/components/coupang/Badge";
 import Header from "@/components/coupang/Header";
+import Footer from "@/components/coupang/Footer";
 import ProjectCard from "@/components/coupang/ProjectCard";
 import QACard from "@/components/coupang/QACard";
 import SectionHeading from "@/components/coupang/SectionHeading";
@@ -144,6 +145,7 @@ export default function CoupangHome() {
           </p>
         </section>
       </main>
+      <Footer />
     </div>
   );
 }
