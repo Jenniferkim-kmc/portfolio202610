@@ -27,18 +27,21 @@
   text-decoration: none;
 }
 
-/* 상단 바 */
-.gnb {
+/* 상단 바: 바깥(고정·배경)과 안쪽 한 줄, 모바일 메뉴 패널 */
+.gnbWrap {
   position: sticky;
   top: 0;
   z-index: 20;
+  background: rgb(255 255 255 / 0.96);
+  border-bottom: 1px solid var(--line);
+}
+
+.gnb {
   display: flex;
   align-items: center;
   gap: 40px;
   padding: 0 var(--m);
   height: 64px;
-  background: rgb(255 255 255 / 0.96);
-  border-bottom: 1px solid var(--line);
 }
 
 .logo {
@@ -66,6 +69,46 @@
 
 .gnbRight {
   margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.printBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 38px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--text);
+  font: inherit;
+  font-weight: 700;
+  font-size: 14px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.printBtn:hover {
+  background: var(--grey-bg);
+}
+
+.menuButton {
+  display: none;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--ink);
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.mobilePanel {
+  display: none;
 }
 
 /* 버튼 */
@@ -595,9 +638,344 @@
   color: var(--ink);
 }
 
+
+/* 대표 프로젝트 카드: 왼쪽 요약·근거, 오른쪽 화면 (/coupang 카드와 같은 형식) */
+.projects {
+  margin-top: 56px;
+  display: grid;
+  gap: 24px;
+}
+
+.project {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  border-radius: 24px;
+  background: #fff;
+  overflow: hidden;
+  text-align: left;
+}
+
+.projectBody {
+  padding: clamp(28px, 3.4vw, 44px);
+  display: flex;
+  flex-direction: column;
+}
+
+.projectTop {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.rank {
+  font-weight: 800;
+  font-size: 14px;
+  color: var(--blue-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.evidence {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.evidence::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.measured {
+  background: var(--blue-soft);
+  color: var(--blue-text);
+}
+
+.pending {
+  background: var(--grey-bg);
+  color: var(--gray);
+}
+
+.teamTag {
+  padding: 4px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: 13px;
+  color: var(--sub);
+}
+
+.projectTitle {
+  margin: 16px 0 0;
+  font-weight: 800;
+  font-size: clamp(22px, 2.2vw, 28px);
+  line-height: 1.4;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+
+.projectTitle a:hover {
+  color: var(--blue-text);
+}
+
+.problem {
+  margin: 12px 0 0;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--text);
+}
+
+.meta {
+  margin: 22px 0 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 16px;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.meta dt {
+  color: var(--gray);
+}
+
+.meta dd {
+  margin: 0;
+  color: var(--text);
+}
+
+.contribs {
+  margin: 22px 0 0;
+  padding: 18px 0 0;
+  border-top: 1px solid var(--line);
+  list-style: none;
+  display: grid;
+  gap: 8px;
+}
+
+.contribs li {
+  display: flex;
+  gap: 8px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--text);
+}
+
+.contribs li::before {
+  content: "✓";
+  flex: none;
+  color: var(--blue);
+  font-weight: 800;
+}
+
+.projectActions {
+  margin-top: auto;
+  padding-top: 24px;
+}
+
+.textLink {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--blue-text) !important;
+}
+
+.textLink:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.projectShot {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4%;
+  min-height: 320px;
+  padding: 32px 24px 48px;
+  background: var(--blue-soft);
+}
+
+/* 확대 대화상자 안의 이미지에는 적용되지 않도록 버튼 안의 썸네일만 지정 */
+.projectShot > button > img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 44%;
+  max-height: 360px;
+  border-radius: 12px;
+  box-shadow: 0 12px 28px -18px rgb(25 31 40 / 0.45);
+}
+
+.projectShotWide > button > img {
+  width: 100%;
+  max-width: 100%;
+  max-height: none;
+  border-radius: 10px;
+}
+
+.shotCaption {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 14px;
+  margin: 0;
+  font-size: 12px;
+  color: var(--gray);
+  text-align: center;
+}
+
+/* 역량: 면접관 질문 카드 */
+.qaGrid {
+  margin-top: 56px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  text-align: left;
+}
+
+.qa {
+  display: flex;
+  flex-direction: column;
+  padding: 32px;
+  border-radius: 24px;
+  background: var(--grey-bg);
+}
+
+.qaNeed {
+  align-self: flex-start;
+  margin: 0;
+  padding: 4px 10px;
+  border-radius: 8px;
+  background: #fff;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--sub);
+}
+
+.qaQ {
+  margin: 14px 0 0;
+  font-weight: 800;
+  font-size: 21px;
+  line-height: 1.45;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.qaQ span {
+  color: var(--blue);
+}
+
+.qaA {
+  margin: 14px 0 0;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: #fff;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+.qaPoints {
+  margin: 16px 0 0;
+  padding-left: 1.1em;
+  list-style: disc;
+  display: grid;
+  gap: 8px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+.qaLink {
+  margin-top: auto;
+  padding-top: 18px;
+}
+
+/* 입사 후 포부: 한 줄 전체, 세 항목을 나란히 */
+.qaPlan {
+  grid-column: 1 / -1;
+  background: var(--blue-soft);
+}
+
+.qaPlan .qaPoints {
+  padding-left: 0;
+  list-style: none;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.qaPlan .qaPoints li {
+  padding: 16px 18px;
+  border-radius: 14px;
+  background: #fff;
+}
+
+/* 상세 페이지: 그로스 관점에서 본 이 프로젝트 */
+.aside {
+  margin-top: 8px;
+  padding: 28px;
+  border-radius: 20px;
+  background: var(--blue-soft);
+}
+
+.aside h2 {
+  margin: 0;
+  font-weight: 800;
+  font-size: 18px;
+  color: var(--ink);
+}
+
+.aside ul {
+  margin: 14px 0 0;
+  padding-left: 1.1em;
+  list-style: disc;
+  display: grid;
+  gap: 8px;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text);
+}
+
 @media (max-width: 900px) {
-  .menu {
+  .menu,
+  .gnbMail {
     display: none;
+  }
+
+  .menuButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mobilePanel[data-open="true"] {
+    display: grid;
+    padding: 8px var(--m) 16px;
+    border-top: 1px solid var(--line);
+  }
+
+  .mobilePanel a {
+    padding: 12px 0;
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--ink);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .project,
+  .qaGrid,
+  .qaPlan .qaPoints {
+    grid-template-columns: 1fr;
+  }
+
+  .qa {
+    padding: 24px;
   }
 
   .heroTitle {
