@@ -3,7 +3,15 @@ import type { QA } from "@/data/growthContent";
 import styles from "@/app/growth/growth.module.css";
 
 // 역량 섹션: 면접관이 물어볼 질문 하나와 한 줄 답, 근거
-export default function GrowthQACard({ item, index }: { item: QA; index: number }) {
+export default function GrowthQACard({
+  item,
+  index,
+  basePath = "/growth",
+}: {
+  item: QA;
+  index: number;
+  basePath?: string;
+}) {
   return (
     <article className={`${styles.qa} ${item.kind === "plan" ? styles.qaPlan : ""}`}>
       <p className={styles.qaNeed}>{item.need}</p>
@@ -31,7 +39,7 @@ export default function GrowthQACard({ item, index }: { item: QA; index: number 
         })}
       </ul>
       {item.link && (
-        <Link href={`/growth/work/${item.link.slug}`} className={`${styles.textLink} ${styles.qaLink}`}>
+        <Link href={`${basePath}/work/${item.link.slug}`} className={`${styles.textLink} ${styles.qaLink}`}>
           {item.link.label} →
         </Link>
       )}

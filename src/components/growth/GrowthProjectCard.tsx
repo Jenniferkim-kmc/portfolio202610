@@ -9,13 +9,15 @@ export default function GrowthProjectCard({
   index,
   project,
   feature,
+  basePath = "/growth",
 }: {
   index: number;
   project: Project;
   feature: GrowthFeature;
+  basePath?: string;
 }) {
   const detail = project.detail;
-  const href = `/growth/work/${project.slug}`;
+  const href = `${basePath}/work/${project.slug}`;
   const wide = feature.pics.every((pic) => pic.width > pic.height);
 
   return (

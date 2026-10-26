@@ -12,10 +12,10 @@ const links = [
   { href: "#caps", label: "역량" },
 ];
 
-// 상세 페이지에서는 앵커 앞에 /growth를 붙여 메인으로 이동
-export default function GrowthHeader({ home = false }: { home?: boolean }) {
+// 상세 페이지에서는 앵커 앞에 base(예: /growth, /viver)를 붙여 메인으로 이동
+export default function GrowthHeader({ home = false, base = "/growth" }: { home?: boolean; base?: string }) {
   const [open, setOpen] = useState(false);
-  const prefix = home ? "" : "/growth";
+  const prefix = home ? "" : base;
 
   useEffect(() => {
     if (!open) return;
@@ -27,7 +27,7 @@ export default function GrowthHeader({ home = false }: { home?: boolean }) {
   return (
     <header className={styles.gnbWrap}>
       <div className={styles.gnb}>
-        <Link href="/growth" className={styles.logo}>
+        <Link href={base} className={styles.logo}>
           Jennifer Kim<span>.</span>
         </Link>
         <nav className={styles.menu} aria-label="주요 메뉴">
@@ -46,7 +46,7 @@ export default function GrowthHeader({ home = false }: { home?: boolean }) {
             type="button"
             className={styles.menuButton}
             aria-expanded={open}
-            aria-controls="growth-mobile-menu"
+            aria-controls="mobile-menu"
             aria-label={open ? "메뉴 닫기" : "메뉴 열기"}
             onClick={() => setOpen((v) => !v)}
           >
@@ -55,7 +55,7 @@ export default function GrowthHeader({ home = false }: { home?: boolean }) {
         </div>
       </div>
       <nav
-        id="growth-mobile-menu"
+        id="mobile-menu"
         className={styles.mobilePanel}
         data-open={open}
         aria-label="모바일 메뉴"
