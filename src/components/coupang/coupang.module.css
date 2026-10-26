@@ -725,6 +725,29 @@
   color: var(--sub);
 }
 
+.closing {
+  margin-bottom: 32px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--border);
+}
+
+.closingTitle {
+  margin: 0;
+  font-weight: 800;
+  font-size: clamp(22px, 2.6vw, 30px);
+  line-height: 1.4;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  word-break: keep-all;
+}
+
+.closingText {
+  margin: 12px 0 20px;
+  font-size: 15px;
+  color: var(--sub);
+  word-break: keep-all;
+}
+
 .footerRow {
   display: flex;
   flex-wrap: wrap;
