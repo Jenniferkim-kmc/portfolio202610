@@ -725,10 +725,11 @@
   color: var(--sub);
 }
 
+/* 푸터 위 마무리 문장: 연한 파란 띠 */
 .closing {
-  margin-bottom: 32px;
-  padding-bottom: 32px;
-  border-bottom: 1px solid var(--border);
+  padding: clamp(80px, 9vw, 128px) var(--m);
+  text-align: center;
+  background: var(--primary-soft);
 }
 
 .closingTitle {
@@ -742,8 +743,8 @@
 }
 
 .closingText {
-  margin: 12px 0 20px;
-  font-size: 15px;
+  margin: 14px 0 28px;
+  font-size: 16px;
   color: var(--sub);
   word-break: keep-all;
 }

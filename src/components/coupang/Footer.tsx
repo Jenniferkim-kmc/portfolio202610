@@ -3,8 +3,8 @@ import styles from "./coupang.module.css";
 
 export default function Footer() {
   return (
-    <footer className={styles.footer}>
-      <div className={styles.closing}>
+    <>
+      <section className={styles.closing}>
         <p className={styles.closingTitle}>
           고객이 불편을 말하기 전에 먼저 찾아 고치는 일,
           <br />
@@ -16,13 +16,15 @@ export default function Footer() {
         <a href={`mailto:${EMAIL}`} className={styles.btn}>
           메일로 이야기 나누기
         </a>
-      </div>
-      <div className={styles.footerRow}>
-        <strong>김유정 (Jennifer Kim)</strong>
-        <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
-        <a href={`tel:${PHONE}`}>{PHONE}</a>
-      </div>
-      <p className={styles.disclaimer}>© 2026 김유정. All rights reserved.</p>
-    </footer>
+      </section>
+      <footer className={styles.footer}>
+        <div className={styles.footerRow}>
+          <strong>김유정 (Jennifer Kim)</strong>
+          <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+          <a href={`tel:${PHONE}`}>{PHONE}</a>
+        </div>
+        <p className={styles.disclaimer}>© 2026 김유정. All rights reserved.</p>
+      </footer>
+    </>
   );
 }
