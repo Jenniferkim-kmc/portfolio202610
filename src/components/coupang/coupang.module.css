@@ -533,6 +533,41 @@
   border-radius: 8px;
 }
 
+/* 화면 캡처 대신 성과 지표를 세로로 쌓아 보여주는 패널 */
+.shotStats {
+  margin: 0;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  gap: 20px;
+  padding: 32px clamp(24px, 3vw, 36px);
+}
+
+.shotStats > div {
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-strong);
+}
+
+.shotStats > div:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.shotStats dt {
+  font-weight: 800;
+  font-size: clamp(28px, 3vw, 36px);
+  letter-spacing: -0.03em;
+  color: var(--primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.shotStats dd {
+  margin: 4px 0 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--sub);
+}
+
 .shotCaption {
   position: absolute;
   left: 16px;

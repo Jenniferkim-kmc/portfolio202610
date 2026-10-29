@@ -57,6 +57,17 @@ export default function ProjectCard({
           </Link>
         </div>
       </div>
+      {feature.pics.length === 0 ? (
+        // 화면 캡처가 없는 프로젝트(예: 프로모션)는 상세 페이지의 성과 지표를 대신 보여줌
+        <dl className={`${styles.shot} ${styles.shotStats}`}>
+          {detail?.metrics.map((m) => (
+            <div key={m.label}>
+              <dt>{m.value}</dt>
+              <dd>{m.label}</dd>
+            </div>
+          ))}
+        </dl>
+      ) : (
       <div className={`${styles.shot} ${wide ? styles.shotWide : ""}`}>
         {feature.pics.map((pic) => (
           <ZoomableImage
@@ -71,6 +82,7 @@ export default function ProjectCard({
         ))}
         <p className={styles.shotCaption}>기획 단계에서 만든 동작 화면 · 누르면 크게 보기</p>
       </div>
+      )}
     </article>
   );
 }
