@@ -9,13 +9,15 @@ export default function ProjectCard({
   index,
   project,
   feature,
+  basePath = "/coupang",
 }: {
   index: number;
   project: Project;
   feature: Feature;
+  basePath?: string;
 }) {
   const detail = project.detail;
-  const href = `/coupang/work/${project.slug}`;
+  const href = `${basePath}/work/${project.slug}`;
   const wide = feature.pics.every((pic) => pic.width > pic.height);
 
   return (

@@ -1,0 +1,17 @@
+/* 페이지 상단 메뉴(header)·마무리 띠(footer 바로 앞 section)·푸터(footer)는 main 바깥에 있음.
+   main 안의 header(상세 페이지 제목 영역 등)는 건드리지 않음 */
+.part:not(:first-child) header:not(main header),
+.part:not(:last-child) footer:not(main footer),
+.part:not(:last-child) section:has(+ footer):not(main section) {
+  display: none;
+}
+
+@media print {
+  .part + .part {
+    break-before: page;
+  }
+
+  .part header:not(main header) {
+    display: none;
+  }
+}

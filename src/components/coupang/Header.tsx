@@ -12,10 +12,10 @@ const links = [
   { href: "#caps", label: "역량" },
 ];
 
-// 상세 페이지에서는 앵커 앞에 /coupang을 붙여 메인으로 이동
-export default function Header({ home = false }: { home?: boolean }) {
+// 상세 페이지에서는 앵커 앞에 base(예: /coupang, /logistics)를 붙여 메인으로 이동
+export default function Header({ home = false, base = "/coupang" }: { home?: boolean; base?: string }) {
   const [open, setOpen] = useState(false);
-  const prefix = home ? "" : "/coupang";
+  const prefix = home ? "" : base;
 
   useEffect(() => {
     if (!open) return;
@@ -30,7 +30,7 @@ export default function Header({ home = false }: { home?: boolean }) {
         본문으로 건너뛰기
       </a>
       <div className={styles.headerInner}>
-        <Link href="/coupang" className={styles.logo}>
+        <Link href={base} className={styles.logo}>
           Jennifer Kim<small>개인 포트폴리오</small>
         </Link>
         <nav className={styles.menu} aria-label="주요 메뉴">
@@ -41,7 +41,7 @@ export default function Header({ home = false }: { home?: boolean }) {
           ))}
         </nav>
         <div className={styles.headerRight}>
-          <PrintButton />
+          <PrintButton href={`${base}/print`} />
           <a href={`mailto:${EMAIL}`} className={`${styles.btn} ${styles.btnSmall}`}>
             메일 보내기
           </a>

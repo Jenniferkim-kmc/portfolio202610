@@ -38,7 +38,7 @@ export default function GrowthHeader({ home = false, base = "/growth" }: { home?
           ))}
         </nav>
         <div className={styles.gnbRight}>
-          <PrintButton className={styles.printBtn} />
+          <PrintButton href={`${base}/print`} className={styles.printBtn} />
           <a href={`mailto:${EMAIL}`} className={`${styles.btn} ${styles.btnSmall} ${styles.gnbMail}`}>
             메일 보내기
           </a>
