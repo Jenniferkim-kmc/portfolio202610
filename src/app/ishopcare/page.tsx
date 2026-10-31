@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import GrowthAiSection from "@/components/growth/GrowthAiSection";
 import GrowthFooter from "@/components/growth/GrowthFooter";
 import GrowthHeader from "@/components/growth/GrowthHeader";
 import GrowthProjectCard from "@/components/growth/GrowthProjectCard";
@@ -97,6 +98,7 @@ export default function IshopcareHome() {
             ))}
           </div>
         </section>
+        <GrowthAiSection variant="root" grey />
       </main>
 
       <GrowthFooter {...CLOSING} />

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import AiSection from "@/components/coupang/AiSection";
 import Badge from "@/components/coupang/Badge";
 import Header from "@/components/coupang/Header";
 import Footer from "@/components/coupang/Footer";
@@ -144,6 +145,7 @@ export default function CoupangHome() {
             {extras}
           </p>
         </section>
+        <AiSection variant="root" />
       </main>
       <Footer />
     </div>

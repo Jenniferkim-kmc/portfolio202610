@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import AiSection from "@/components/coupang/AiSection";
 import Badge from "@/components/coupang/Badge";
 import Footer from "@/components/coupang/Footer";
 import Header from "@/components/coupang/Header";
@@ -144,6 +145,7 @@ export default function EmartEverydayHome() {
           </div>
           <p className={styles.source}>{extras}</p>
         </section>
+        <AiSection variant="root" />
       </main>
       <Footer {...CLOSING} />
     </div>
