@@ -7,9 +7,9 @@ import { EMAIL } from "@/data/growthContent";
 import styles from "@/app/growth/growth.module.css";
 
 const links = [
-  { href: "#how", label: "일하는 방식" },
   { href: "#work", label: "프로젝트" },
-  { href: "#caps", label: "역량" },
+  { href: "#ai", label: "AI 활용" },
+  { href: "#how", label: "일하는 방식" },
 ];
 
 // 상세 페이지에서는 앵커 앞에 base(예: /growth, /viver)를 붙여 메인으로 이동

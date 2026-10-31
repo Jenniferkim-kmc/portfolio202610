@@ -8,9 +8,9 @@ import type { Project } from "@/data/projects";
 export const BASE = "/";
 
 export const LINKS = [
-  { href: "#about", label: "소개" },
   { href: "#work", label: "프로젝트" },
   { href: "#ai", label: "AI 활용" },
+  { href: "#about", label: "소개" },
   { href: "#faq", label: "자주 묻는 질문" },
 ];
 

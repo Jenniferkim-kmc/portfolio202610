@@ -4,10 +4,9 @@ import Badge from "@/components/coupang/Badge";
 import Footer from "@/components/coupang/Footer";
 import Header from "@/components/coupang/Header";
 import ProjectCard from "@/components/coupang/ProjectCard";
-import QACard from "@/components/coupang/QACard";
 import SectionHeading from "@/components/coupang/SectionHeading";
 import styles from "@/components/coupang/coupang.module.css";
-import { BASE, CLOSING, getSaasFeature, questions, saasProjects, steps, tools } from "@/data/saasContent";
+import { BASE, CLOSING, getSaasFeature, saasProjects, steps, tools } from "@/data/saasContent";
 
 export const metadata: Metadata = {
   title: "김유정 (Jennifer Kim) — B2B SaaS Product Manager",
@@ -45,8 +44,8 @@ export default function SaasHome() {
               <a href="#work" className={styles.btn}>
                 프로젝트 보기
               </a>
-              <a href="#caps" className={`${styles.btn} ${styles.btnLine}`}>
-                역량 보기
+              <a href="#ai" className={`${styles.btn} ${styles.btnLine}`}>
+                AI 활용 보기
               </a>
             </div>
           </div>
@@ -85,6 +84,24 @@ export default function SaasHome() {
           </figure>
         </section>
 
+        <section id="work" className={`${styles.section} ${styles.surface}`}>
+          <SectionHeading
+            label="대표 프로젝트"
+            title="운영 공수를 줄이고 프로세스를 바꾼 경험"
+            lead="운영 자동화와 백오피스 기획에 가까운 순서로 배치했습니다. 카드마다 성과를 어디까지 말할 수 있는지 근거를 표시했습니다."
+          />
+          <div className={styles.projects}>
+            {saasProjects.map((project, i) => {
+              const feature = getSaasFeature(project.slug);
+              return feature ? (
+                <ProjectCard key={project.slug} index={i} project={project} feature={feature} basePath={BASE} />
+              ) : null;
+            })}
+          </div>
+        </section>
+
+        <AiSection variant="saas" />
+
         <section id="how" className={`${styles.section} ${styles.surface}`}>
           <SectionHeading label="일하는 방식" title="병목을 찾고, 반복을 시스템으로 옮깁니다" />
           <ol className={styles.steps}>
@@ -103,36 +120,6 @@ export default function SaasHome() {
             ))}
           </div>
         </section>
-
-        <section id="work" className={styles.section}>
-          <SectionHeading
-            label="대표 프로젝트"
-            title="운영 공수를 줄이고 프로세스를 바꾼 경험"
-            lead="운영 자동화와 백오피스 기획에 가까운 순서로 배치했습니다. 카드마다 성과를 어디까지 말할 수 있는지 근거를 표시했습니다."
-          />
-          <div className={styles.projects}>
-            {saasProjects.map((project, i) => {
-              const feature = getSaasFeature(project.slug);
-              return feature ? (
-                <ProjectCard key={project.slug} index={i} project={project} feature={feature} basePath={BASE} />
-              ) : null;
-            })}
-          </div>
-        </section>
-
-        <section id="caps" className={`${styles.section} ${styles.surface}`}>
-          <SectionHeading
-            label="역량"
-            title="면접관이 물어볼 질문에 미리 답합니다"
-            lead="B2B SaaS 서비스기획에서 확인하고 싶을 질문을 뽑았습니다."
-          />
-          <div className={styles.qaGrid}>
-            {questions.map((item, i) => (
-              <QACard key={item.q} item={item} index={i} basePath={BASE} />
-            ))}
-          </div>
-        </section>
-        <AiSection variant="saas" />
       </main>
       <Footer {...CLOSING} />
     </div>

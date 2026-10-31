@@ -7,9 +7,9 @@ import PrintButton from "./PrintButton";
 import styles from "./coupang.module.css";
 
 const defaultLinks = [
-  { href: "#how", label: "일하는 방식" },
   { href: "#work", label: "프로젝트" },
-  { href: "#caps", label: "역량" },
+  { href: "#ai", label: "AI 활용" },
+  { href: "#how", label: "일하는 방식" },
 ];
 
 // 상세 페이지에서는 앵커 앞에 base(예: /coupang, /logistics, 루트는 /)를 붙여 메인으로 이동

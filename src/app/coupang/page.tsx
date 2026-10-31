@@ -4,15 +4,12 @@ import Badge from "@/components/coupang/Badge";
 import Header from "@/components/coupang/Header";
 import Footer from "@/components/coupang/Footer";
 import ProjectCard from "@/components/coupang/ProjectCard";
-import QACard from "@/components/coupang/QACard";
 import SectionHeading from "@/components/coupang/SectionHeading";
 import styles from "@/components/coupang/coupang.module.css";
 import {
   POSTING,
   coupangProjects,
-  extras,
   getFeature,
-  questions,
   steps,
 } from "@/data/coupangContent";
 
@@ -53,8 +50,8 @@ export default function CoupangHome() {
               <a href="#work" className={styles.btn}>
                 프로젝트 보기
               </a>
-              <a href="#caps" className={`${styles.btn} ${styles.btnLine}`}>
-                역량 보기
+              <a href="#ai" className={`${styles.btn} ${styles.btnLine}`}>
+                AI 활용 보기
               </a>
             </div>
           </div>
@@ -93,6 +90,24 @@ export default function CoupangHome() {
           </figure>
         </section>
 
+        <section id="work" className={`${styles.section} ${styles.surface}`}>
+          <SectionHeading
+            label="대표 프로젝트"
+            title="문제를 쪼갠 과정과 확인한 결과"
+            lead="지원 직무와 직접 연결되는 순서로 배치했습니다. 카드마다 성과를 어디까지 말할 수 있는지 근거를 표시했습니다."
+          />
+          <div className={styles.projects}>
+            {coupangProjects.map((project, i) => {
+              const feature = getFeature(project.slug);
+              return feature ? (
+                <ProjectCard key={project.slug} index={i} project={project} feature={feature} />
+              ) : null;
+            })}
+          </div>
+        </section>
+
+        <AiSection variant="root" />
+
         <section id="how" className={`${styles.section} ${styles.surface}`}>
           <SectionHeading label="일하는 방식" title="현상에서 숫자까지 직접 확인합니다" />
           <ol className={styles.steps}>
@@ -113,39 +128,6 @@ export default function CoupangHome() {
             )}
           </div>
         </section>
-
-        <section id="work" className={styles.section}>
-          <SectionHeading
-            label="대표 프로젝트"
-            title="문제를 쪼갠 과정과 확인한 결과"
-            lead="지원 직무와 직접 연결되는 순서로 배치했습니다. 카드마다 성과를 어디까지 말할 수 있는지 근거를 표시했습니다."
-          />
-          <div className={styles.projects}>
-            {coupangProjects.map((project, i) => {
-              const feature = getFeature(project.slug);
-              return feature ? (
-                <ProjectCard key={project.slug} index={i} project={project} feature={feature} />
-              ) : null;
-            })}
-          </div>
-        </section>
-
-        <section id="caps" className={`${styles.section} ${styles.surface}`}>
-          <SectionHeading
-            label="역량"
-            title="면접관이 물어볼 질문에 미리 답합니다"
-            lead="이 포트폴리오를 면접관 입장에서 읽고 더 확인하고 싶을 질문을 뽑았습니다."
-          />
-          <div className={styles.qaGrid}>
-            {questions.map((item, i) => (
-              <QACard key={item.q} item={item} index={i} />
-            ))}
-          </div>
-          <p className={styles.source}>
-            {extras}
-          </p>
-        </section>
-        <AiSection variant="root" />
       </main>
       <Footer />
     </div>

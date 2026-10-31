@@ -4,8 +4,7 @@ import GrowthAiSection from "@/components/growth/GrowthAiSection";
 import GrowthFooter from "@/components/growth/GrowthFooter";
 import GrowthHeader from "@/components/growth/GrowthHeader";
 import GrowthProjectCard from "@/components/growth/GrowthProjectCard";
-import GrowthQACard from "@/components/growth/GrowthQACard";
-import { BASE, CLOSING, POSTING, getPolarisFeature, polarisProjects, questions, steps, tools } from "@/data/polarisContent";
+import { BASE, CLOSING, POSTING, getPolarisFeature, polarisProjects, steps, tools } from "@/data/polarisContent";
 import styles from "@/app/growth/growth.module.css";
 
 export const metadata: Metadata = {
@@ -35,8 +34,8 @@ export default function PolarisHome() {
             <a href="#work" className={styles.btn}>
               프로젝트 보기
             </a>
-            <a href="#caps" className={`${styles.btn} ${styles.btnSoft}`}>
-              역량 보기
+            <a href="#ai" className={`${styles.btn} ${styles.btnSoft}`}>
+              AI 활용 보기
             </a>
           </div>
           <figure className={styles.heroShot}>
@@ -49,25 +48,6 @@ export default function PolarisHome() {
               sizes="(max-width: 1000px) 100vw, 960px"
             />
           </figure>
-        </section>
-
-        <section id="how" className={`${styles.section} ${styles.center}`}>
-          <span className={styles.badge}>일하는 방식</span>
-          <h2 className={styles.h2}>흐름을 나누고, AI로 만들어 보고, 숫자로 확인합니다</h2>
-          <ol className={styles.steps}>
-            {steps.map((s, i) => (
-              <li key={s.title}>
-                <p className={styles.stepNo}>STEP {i + 1}</p>
-                <h3>{s.title}</h3>
-                <p>{s.text}</p>
-              </li>
-            ))}
-          </ol>
-          <div className={styles.tools}>
-            {tools.map((t) => (
-              <span key={t}>{t}</span>
-            ))}
-          </div>
         </section>
 
         <section id="work" className={`${styles.section} ${styles.grey}`}>
@@ -86,19 +66,26 @@ export default function PolarisHome() {
           </div>
         </section>
 
-        <section id="caps" className={styles.section}>
-          <div className={styles.center}>
-            <span className={styles.badge}>역량</span>
-            <h2 className={styles.h2}>면접관이 물어볼 질문에 미리 답합니다</h2>
-            <p className={styles.desc}>공고의 자격요건과 면접 안내(AI 툴 활용 경험)마다 확인하고 싶을 질문을 뽑았습니다.</p>
-          </div>
-          <div className={styles.qaGrid}>
-            {questions.map((item, i) => (
-              <GrowthQACard key={item.q} item={item} index={i} basePath={BASE} />
+        <GrowthAiSection variant="root" />
+
+        <section id="how" className={`${styles.section} ${styles.grey} ${styles.center}`}>
+          <span className={styles.badge}>일하는 방식</span>
+          <h2 className={styles.h2}>흐름을 나누고, AI로 만들어 보고, 숫자로 확인합니다</h2>
+          <ol className={styles.steps}>
+            {steps.map((s, i) => (
+              <li key={s.title}>
+                <p className={styles.stepNo}>STEP {i + 1}</p>
+                <h3>{s.title}</h3>
+                <p>{s.text}</p>
+              </li>
+            ))}
+          </ol>
+          <div className={styles.tools}>
+            {tools.map((t) => (
+              <span key={t}>{t}</span>
             ))}
           </div>
         </section>
-        <GrowthAiSection variant="root" grey />
       </main>
 
       <GrowthFooter {...CLOSING} />

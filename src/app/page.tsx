@@ -78,6 +78,24 @@ export default function Home() {
           </figure>
         </section>
 
+        <section id="work" className={`${styles.section} ${styles.surface}`}>
+          <SectionHeading
+            label="대표 프로젝트"
+            title="문제를 쪼갠 과정과 확인한 결과"
+            lead="카드마다 성과를 어디까지 말할 수 있는지 근거를 표시했습니다."
+          />
+          <div className={styles.projects}>
+            {rootProjects.map((project, i) => {
+              const feature = getRootFeature(project.slug);
+              return feature ? (
+                <ProjectCard key={project.slug} index={i} project={project} feature={feature} basePath="" />
+              ) : null;
+            })}
+          </div>
+        </section>
+
+        <AiSection variant="root" />
+
         <section id="about" className={`${styles.section} ${styles.surface}`}>
           <div className={styles.about}>
             <SectionHeading label="소개" title="먼저 묻고, 직접 만들고, 숫자로 확인합니다" />
@@ -96,25 +114,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-
-        <section id="work" className={styles.section}>
-          <SectionHeading
-            label="대표 프로젝트"
-            title="문제를 쪼갠 과정과 확인한 결과"
-            lead="카드마다 성과를 어디까지 말할 수 있는지 근거를 표시했습니다."
-          />
-          <div className={styles.projects}>
-            {rootProjects.map((project, i) => {
-              const feature = getRootFeature(project.slug);
-              return feature ? (
-                <ProjectCard key={project.slug} index={i} project={project} feature={feature} basePath="" />
-              ) : null;
-            })}
-          </div>
-        </section>
-
-        <AiSection variant="root" surface />
-
         <section id="faq" className={styles.section}>
           <SectionHeading label="자주 묻는 질문" title="일하는 방식, 미리 답합니다" />
           <ul className={styles.faq}>

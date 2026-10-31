@@ -4,8 +4,7 @@ import GrowthAiSection from "@/components/growth/GrowthAiSection";
 import GrowthFooter from "@/components/growth/GrowthFooter";
 import GrowthHeader from "@/components/growth/GrowthHeader";
 import GrowthProjectCard from "@/components/growth/GrowthProjectCard";
-import GrowthQACard from "@/components/growth/GrowthQACard";
-import { getGrowthFeature, growthCards, questions } from "@/data/growthContent";
+import { getGrowthFeature, growthCards } from "@/data/growthContent";
 import styles from "./growth.module.css";
 
 export const metadata: Metadata = {
@@ -49,8 +48,8 @@ export default function GrowthHome() {
             <a href="#work" className={styles.btn}>
               프로젝트 보기
             </a>
-            <a href="#caps" className={`${styles.btn} ${styles.btnSoft}`}>
-              역량 보기
+            <a href="#ai" className={`${styles.btn} ${styles.btnSoft}`}>
+              AI 활용 보기
             </a>
           </div>
           <figure className={styles.heroShot}>
@@ -63,25 +62,6 @@ export default function GrowthHome() {
               sizes="(max-width: 1000px) 100vw, 960px"
             />
           </figure>
-        </section>
-
-        <section id="how" className={`${styles.section} ${styles.center}`}>
-          <span className={styles.badge}>일하는 방식</span>
-          <h2 className={styles.h2}>문제부터 숫자까지 직접 확인합니다</h2>
-          <ol className={styles.steps}>
-            {steps.map((s, i) => (
-              <li key={s.title}>
-                <p className={styles.stepNo}>STEP {i + 1}</p>
-                <h3>{s.title}</h3>
-                <p>{s.text}</p>
-              </li>
-            ))}
-          </ol>
-          <div className={styles.tools}>
-            {["SQL", "Figma", "Notion", "VS Code", "Claude", "GPT", "바이브코딩", "스토리보드"].map((t) => (
-              <span key={t}>{t}</span>
-            ))}
-          </div>
         </section>
 
         <section id="work" className={`${styles.section} ${styles.grey}`}>
@@ -100,19 +80,26 @@ export default function GrowthHome() {
           </div>
         </section>
 
-        <section id="caps" className={styles.section}>
-          <div className={styles.center}>
-            <span className={styles.badge}>역량</span>
-            <h2 className={styles.h2}>면접관이 물어볼 질문에 미리 답합니다</h2>
-            <p className={styles.desc}>이 포트폴리오를 면접관 입장에서 읽고 더 확인하고 싶을 질문을 뽑았습니다.</p>
-          </div>
-          <div className={styles.qaGrid}>
-            {questions.map((item, i) => (
-              <GrowthQACard key={item.q} item={item} index={i} />
+        <GrowthAiSection variant="growth" />
+
+        <section id="how" className={`${styles.section} ${styles.grey} ${styles.center}`}>
+          <span className={styles.badge}>일하는 방식</span>
+          <h2 className={styles.h2}>문제부터 숫자까지 직접 확인합니다</h2>
+          <ol className={styles.steps}>
+            {steps.map((s, i) => (
+              <li key={s.title}>
+                <p className={styles.stepNo}>STEP {i + 1}</p>
+                <h3>{s.title}</h3>
+                <p>{s.text}</p>
+              </li>
+            ))}
+          </ol>
+          <div className={styles.tools}>
+            {["SQL", "Figma", "Notion", "VS Code", "Claude", "GPT", "바이브코딩", "스토리보드"].map((t) => (
+              <span key={t}>{t}</span>
             ))}
           </div>
         </section>
-        <GrowthAiSection variant="growth" grey />
       </main>
 
       <GrowthFooter />
