@@ -1,7 +1,8 @@
 // /logistics — 물류 서비스기획 포트폴리오 (쿠팡 페이지와 같은 디자인·형식)
 // 모든 수치·기간·역할은 src/data/projects.ts, src/components/Experience.tsx 원본에서 가져옴. 특정 공고 문구는 쓰지 않음.
 import type { Feature, QA } from "@/data/coupangContent";
-import { projects, type Project } from "@/data/projects";
+import { logisticsDetails } from "@/data/logisticsProjects";
+import type { Project } from "@/data/projects";
 
 export const BASE = "/logistics";
 
@@ -97,9 +98,9 @@ export function getLogisticsFeature(slug: string) {
   return features.find((feature) => feature.slug === slug);
 }
 
-// 카드 순서대로 원본 프로젝트를 정렬
+// 카드 순서대로 상세 복사본(시스템 흐름·지표 설계 추가)을 정렬
 export const logisticsProjects: Project[] = features
-  .map((feature) => projects.find((project) => project.slug === feature.slug))
+  .map((feature) => logisticsDetails.find((project) => project.slug === feature.slug))
   .filter((project): project is Project => Boolean(project?.detail));
 
 export const questions: QA[] = [
