@@ -942,7 +942,76 @@
   color: var(--text);
 }
 
+
+/* AI 활용 역량: 실제 사용 중 / 설계 중 두 카드와 워크플로우 다이어그램 */
+.aiGrid {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.aiCard {
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: #fff;
+}
+
+.aiSingle {
+  margin-top: 40px;
+}
+
+.aiCardHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.aiCardHead h3 {
+  margin: 0;
+  font-weight: 800;
+  font-size: 19px;
+  color: var(--ink);
+}
+
+.aiEmphasis {
+  margin: 18px 0 0;
+  padding: 14px 16px;
+  border-radius: 10px;
+  background: var(--blue-soft);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--blue-text);
+}
+
+.aiDiagram {
+  margin: 20px 0 0;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: #fff;
+}
+
+.aiDiagram img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.aiDiagram figcaption {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--sub);
+}
+
 @media (max-width: 900px) {
+  .aiGrid {
+    grid-template-columns: 1fr;
+  }
+
   .menu,
   .gnbMail {
     display: none;

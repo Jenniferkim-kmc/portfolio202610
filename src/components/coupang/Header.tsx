@@ -6,16 +6,26 @@ import { EMAIL } from "@/data/coupangContent";
 import PrintButton from "./PrintButton";
 import styles from "./coupang.module.css";
 
-const links = [
+const defaultLinks = [
   { href: "#how", label: "일하는 방식" },
   { href: "#work", label: "프로젝트" },
   { href: "#caps", label: "역량" },
 ];
 
-// 상세 페이지에서는 앵커 앞에 base(예: /coupang, /logistics)를 붙여 메인으로 이동
-export default function Header({ home = false, base = "/coupang" }: { home?: boolean; base?: string }) {
+// 상세 페이지에서는 앵커 앞에 base(예: /coupang, /logistics, 루트는 /)를 붙여 메인으로 이동
+// links: 메뉴 항목을 페이지마다 바꿀 때 지정 (기본: 일하는 방식·프로젝트·역량)
+export default function Header({
+  home = false,
+  base = "/coupang",
+  links = defaultLinks,
+}: {
+  home?: boolean;
+  base?: string;
+  links?: { href: string; label: string }[];
+}) {
   const [open, setOpen] = useState(false);
   const prefix = home ? "" : base;
+  const printHref = base === "/" ? "/print" : `${base}/print`;
 
   useEffect(() => {
     if (!open) return;
@@ -41,7 +51,7 @@ export default function Header({ home = false, base = "/coupang" }: { home?: boo
           ))}
         </nav>
         <div className={styles.headerRight}>
-          <PrintButton href={`${base}/print`} />
+          <PrintButton href={printHref} />
           <a href={`mailto:${EMAIL}`} className={`${styles.btn} ${styles.btnSmall}`}>
             메일 보내기
           </a>

@@ -9,6 +9,10 @@ export default function AutoPrint() {
     if (new URLSearchParams(window.location.search).get("auto") !== "1") return;
     let cancelled = false;
     (async () => {
+      // 접혀 있는 자주 묻는 질문도 답이 인쇄되도록 펼침
+      document.querySelectorAll("details").forEach((d) => {
+        d.open = true;
+      });
       const images = [...document.querySelectorAll<HTMLImageElement>("img")];
       images.forEach((img) => {
         img.loading = "eager";
