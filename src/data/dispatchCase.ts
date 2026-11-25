@@ -1,4 +1,4 @@
-// /, /saas, /logistics 전용 상세(손으로 쓴 케이스). /growth 목록(growthCases)에는 넣지 않는다.
+// /, /b2b, /logistics 전용 상세(손으로 쓴 케이스). /growth 목록(growthCases)에는 넣지 않는다.
 // 원본 수치·문구: src/data/projects.ts dispatch-automation. 새 숫자를 만들지 않음.
 import { entranceCase } from "@/data/entranceCase";
 import type { GrowthCase } from "@/data/growthCase";

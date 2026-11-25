@@ -1,4 +1,4 @@
-// /saas — B2B SaaS 서비스기획 포트폴리오 (쿠팡 페이지와 같은 디자인·형식, 특정 공고 없음)
+// /b2b — B2B 서비스기획 포트폴리오 (쿠팡 페이지와 같은 디자인·형식, 특정 공고 없음)
 // 초점: SQL로 병목 찾기 · 백오피스/파트너 어드민 기획 · 수기 운영의 자동화 · 운영 공수 절감
 // 선정: 잔여배차(운영 공수 실측 절감, 파트너 셀프 등록 + 운영자 승인) → PiMS Partners(B2B 파트너 어드민 0→1, RBAC·정산·상태값)
 //       → 낮배송(수기 재배송을 규칙 기반 자동 전환으로) → 공동현관(SQL로 원인 특정, 정규화 지표로 검증)
@@ -9,7 +9,7 @@ import { allProjects } from "@/data/allProjects";
 import { logisticsDetails } from "@/data/logisticsProjects";
 import type { Project } from "@/data/projects";
 
-export const BASE = "/saas";
+export const BASE = "/b2b";
 
 export const CLOSING = {
   variant: "bold" as const,
@@ -108,12 +108,12 @@ export const features: Feature[] = [
   },
 ];
 
-export function getSaasFeature(slug: string) {
+export function getB2bFeature(slug: string) {
   return features.find((feature) => feature.slug === slug);
 }
 
 // 딜리버스 프로젝트는 시스템 흐름 표가 추가된 /logistics 복사본, PiMS는 원본을 사용
-export const saasProjects: Project[] = features
+export const b2bProjects: Project[] = features
   .map(
     (feature) =>
       logisticsDetails.find((p) => p.slug === feature.slug && p.detail) ??
@@ -121,8 +121,8 @@ export const saasProjects: Project[] = features
   )
   .filter((project): project is Project => Boolean(project?.detail));
 
-export function getSaasProject(slug: string) {
-  return saasProjects.find((project) => project.slug === slug);
+export function getB2bProject(slug: string) {
+  return b2bProjects.find((project) => project.slug === slug);
 }
 
 export const questions: QA[] = [

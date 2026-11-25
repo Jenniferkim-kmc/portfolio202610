@@ -1,6 +1,6 @@
-// ‘AI 활용 역량’ 섹션 문구 (기본·Growth·Logistics·SaaS 공통, 포트폴리오별로 첫 문장과 강조 한 줄만 다름)
+// ‘AI 활용 역량’ 섹션 문구 (기본·Growth·Logistics·B2B 공통, 포트폴리오별로 첫 문장과 강조 한 줄만 다름)
 // 사용자가 직접 활용하는 5단계 AI 기획 워크플로우와 작업 환경. 효과 수치는 측정값이 있는 PiMS(3주 → 1주)만 씀.
-export type AiVariant = "root" | "growth" | "logistics" | "saas";
+export type AiVariant = "root" | "growth" | "logistics" | "b2b";
 
 // 하나의 카드로 합친 항목: 5단계 상세는 아래 다이어그램에 있으므로 카드에는 요약만
 export const AI_POINTS = [
@@ -27,10 +27,10 @@ export const AI_VARIANTS: Record<AiVariant, { title: string; lead: string; empha
     lead: "현장에서 나온 운영 이슈가 예외 정책과 시스템 요구사항으로 빠짐없이 이어지도록 AI를 씁니다.",
     emphasis: "Logistics 관점: 운영 회의록에서 나온 이슈를 업무 규칙·상태값·예외 시나리오로 옮기고, 기획자 검토로 현장 합의 여부를 확인합니다.",
   },
-  saas: {
+  b2b: {
     title: "AI로 문서 작성은 줄이고, 승인은 남깁니다",
     lead: "반복되는 문서 작성은 AI에 맡기고, 정책 결정과 최종 승인은 기획자에게 남기는 흐름을 만듭니다.",
-    emphasis: "SaaS 관점: 운영기획서 초안에 역할·권한·상태값을 먼저 정의하고, 기획자가 정책 모순을 확인한 뒤에 화면으로 넘깁니다.",
+    emphasis: "B2B 관점: 운영기획서 초안에 역할·권한·상태값을 먼저 정의하고, 기획자가 정책 모순을 확인한 뒤에 화면으로 넘깁니다.",
   },
 };
 

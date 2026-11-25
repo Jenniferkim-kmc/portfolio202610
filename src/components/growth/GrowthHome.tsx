@@ -11,7 +11,7 @@ import type { GrowthFeature } from "@/data/growthContent";
 import type { Project } from "@/data/projects";
 import styles from "@/app/growth/growth.module.css";
 
-// /growth 메인 틀을 /, /saas, /logistics가 같이 쓴다. 사이트마다 다른 건 프로젝트 카드뿐.
+// /growth 메인 틀을 /, /b2b, /logistics가 같이 쓴다. 사이트마다 다른 건 프로젝트 카드뿐.
 
 // 일하는 순서 6단계
 const steps = [

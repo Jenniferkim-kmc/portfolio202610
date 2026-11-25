@@ -479,7 +479,7 @@ function Block({ b }: { b: CaseBlock }) {
 
 type Other = { slug: string; kicker: string; title: [string, string] };
 
-// base: 이 상세 페이지가 속한 사이트("/growth", "/saas", "/logistics", "/")
+// base: 이 상세 페이지가 속한 사이트("/growth", "/b2b", "/logistics", "/")
 export default function GrowthCase({
   data,
   base = "/growth",
