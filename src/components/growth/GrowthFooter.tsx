@@ -7,7 +7,7 @@ export type FooterProps = {
   role?: string;
   // bold: 짙은 남색 마무리 섹션 (/growth, /, /saas, /logistics). 기본값은 기존 연한 파랑.
   variant?: "soft" | "bold";
-  // bold 전용 색: dark(기본, 짙은 남색) · light(흰 바탕 히어로와 같은 색 — /saas)
+  // bold 전용 색: light(기본, 히어로 파랑 — 전 사이트 통일) · dark(짙은 남색, 예비)
   tone?: "dark" | "light";
 };
 
@@ -53,7 +53,7 @@ export default function GrowthFooter(props: FooterProps) {
 
 // 위 본문과 겹치지 않게 숫자·목록 없이 한 문장 + 연락만 둔다
 function BoldFooter(props: FooterProps) {
-  const { title = GROWTH_TITLE, role = "Growth Product Manager", tone = "dark" } = props;
+  const { title = GROWTH_TITLE, role = "Growth Product Manager", tone = "light" } = props;
   return (
     <section
       className={tone === "light" ? `${styles.closing} ${styles.closingLight}` : styles.closing}
