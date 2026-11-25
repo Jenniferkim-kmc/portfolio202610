@@ -13,6 +13,7 @@ export const BASE = "/saas";
 
 export const CLOSING = {
   variant: "bold" as const,
+  tone: "light" as const,
   title: ["수기로 반복되던 운영 업무를 자동화해,", "운영 공수를 줄이고 회사의 이익으로 만들겠습니다"] as [string, string],
 };
 

@@ -1166,6 +1166,109 @@
   }
 }
 
+/* light 톤 (/saas): 히어로와 같은 흰 바탕 · 짙은 남색 글자 · 파랑 한 가지 */
+.closingLight {
+  --hero-ink: #101828;
+  --hero-sub: #475467;
+  --hero-blue: #1b64da;
+  --hero-blue-deep: #1450b8;
+  --hero-line: #d0d5dd;
+  background: linear-gradient(120deg, var(--hero-blue) 0%, var(--hero-blue) 55%, var(--hero-blue-deep) 100%);
+  color: #fff;
+}
+
+/* 푸터 영역 전체를 히어로 파랑으로 — 앞의 흰 섹션들과 확실히 다른 '마지막 요청' */
+.closingLight::before {
+  background: radial-gradient(closest-side, rgba(255, 255, 255, 0.12), transparent 70%);
+}
+
+.closingLight .closingInner {
+  gap: clamp(28px, 3.5vw, 40px);
+}
+
+.closingLight .closingStatus {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.22);
+  color: #fff;
+}
+
+.closingLight .closingTitle {
+  color: #fff;
+  font-size: clamp(28px, 3.6vw, 46px);
+  letter-spacing: -0.045em;
+}
+
+.closingLight .closingTitle .closingAccent {
+  color: #cfe0ff;
+}
+
+.closingLight .closingActions {
+  align-items: center;
+}
+
+.closingLight .closingBtn {
+  background: #fff;
+  color: var(--hero-blue-deep) !important;
+  box-shadow: 0 6px 16px rgb(9 30 66 / 0.18);
+}
+
+.closingLight .closingBtn:hover {
+  background: #eef4ff;
+}
+
+.closingLight .closingBtnGhost {
+  background: transparent;
+  color: #fff !important;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  box-shadow: none;
+}
+
+.closingLight .closingBtnGhost:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #fff;
+}
+
+.closingLight .closingBtn:focus-visible,
+.closingLight .closingMail:focus-visible {
+  outline: 3px solid rgba(255, 255, 255, 0.6);
+  outline-offset: 3px;
+}
+
+.closingMail {
+  margin-left: 8px;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 255, 255, 0.4);
+  text-underline-offset: 4px;
+  overflow-wrap: anywhere;
+}
+
+.closingMail:hover {
+  color: #fff;
+}
+
+@media (max-width: 720px) {
+  .closingMail {
+    margin: 4px 0 0;
+    font-size: 14px;
+  }
+}
+
+.closingLight .closingFoot {
+  border-top-color: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.closingLight .closingFoot b {
+  color: #fff;
+}
+
+.closingLight .closingFoot a:hover {
+  color: #fff;
+}
+
 
 /* 대표 프로젝트 카드: 왼쪽 요약·근거, 오른쪽 화면 (/coupang 카드와 같은 형식) */
 .projects {

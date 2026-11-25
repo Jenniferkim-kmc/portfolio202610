@@ -7,6 +7,8 @@ export type FooterProps = {
   role?: string;
   // bold: 짙은 남색 마무리 섹션 (/growth, /, /saas, /logistics). 기본값은 기존 연한 파랑.
   variant?: "soft" | "bold";
+  // bold 전용 색: dark(기본, 짙은 남색) · light(흰 바탕 히어로와 같은 색 — /saas)
+  tone?: "dark" | "light";
 };
 
 // /growth 기본 마무리 문장
@@ -51,9 +53,12 @@ export default function GrowthFooter(props: FooterProps) {
 
 // 위 본문과 겹치지 않게 숫자·목록 없이 한 문장 + 연락만 둔다
 function BoldFooter(props: FooterProps) {
-  const { title = GROWTH_TITLE, role = "Growth Product Manager" } = props;
+  const { title = GROWTH_TITLE, role = "Growth Product Manager", tone = "dark" } = props;
   return (
-    <section className={styles.closing} aria-labelledby="closing-title">
+    <section
+      className={tone === "light" ? `${styles.closing} ${styles.closingLight}` : styles.closing}
+      aria-labelledby="closing-title"
+    >
       <div className={styles.closingInner}>
         <div className={styles.closingText}>
           <p className={styles.closingStatus}>
@@ -63,7 +68,7 @@ function BoldFooter(props: FooterProps) {
           <h2 id="closing-title" className={styles.closingTitle}>
             <span>{title[0]}</span> <span className={styles.closingAccent}>{title[1]}</span>
           </h2>
-          <p className={styles.closingSign}>— 김유정 드림</p>
+          {tone === "dark" && <p className={styles.closingSign}>— 김유정 드림</p>}
         </div>
 
         <div className={styles.closingActions}>
@@ -76,6 +81,11 @@ function BoldFooter(props: FooterProps) {
           <a href={`tel:${PHONE}`} className={`${styles.closingBtn} ${styles.closingBtnGhost}`}>
             {PHONE}
           </a>
+          {tone === "light" && (
+            <a href={`mailto:${EMAIL}`} className={styles.closingMail}>
+              {EMAIL}
+            </a>
+          )}
         </div>
       </div>
 
