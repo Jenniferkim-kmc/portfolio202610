@@ -6,16 +6,25 @@ import PrintButton from "@/components/coupang/PrintButton";
 import { EMAIL } from "@/data/growthContent";
 import styles from "@/app/growth/growth.module.css";
 
-const links = [
+// /growth: 자기소개 → 프로젝트 → AI 활용 순서
+const growthLinks = [
+  { href: "#how", label: "자기소개" },
   { href: "#work", label: "프로젝트" },
   { href: "#ai", label: "AI 활용" },
+];
+
+// 회사별 페이지(/viver 등)는 기존 메뉴 그대로
+const companyLinks = [
   { href: "#how", label: "일하는 방식" },
+  { href: "#ai", label: "AI 활용" },
+  { href: "#work", label: "프로젝트" },
 ];
 
 // 상세 페이지에서는 앵커 앞에 base(예: /growth, /viver)를 붙여 메인으로 이동
 export default function GrowthHeader({ home = false, base = "/growth" }: { home?: boolean; base?: string }) {
   const [open, setOpen] = useState(false);
   const prefix = home ? "" : base;
+  const links = base === "/growth" ? growthLinks : companyLinks;
 
   useEffect(() => {
     if (!open) return;

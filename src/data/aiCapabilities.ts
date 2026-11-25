@@ -6,7 +6,7 @@ export type AiVariant = "root" | "growth" | "logistics" | "saas";
 export const AI_POINTS = [
   "회의록 분석 → 문제 정의서 → 운영 정책·운영기획서 → 화면·스토리보드까지, 앞 단계 결과를 다음 단계 입력으로 넘기는 5단계 워크플로우로 기획합니다.",
   "AI가 만든 초안은 회의 합의 여부·누락 요구사항·정책 모순을 직접 확인해 확정하고, 확정된 문서만 화면 설계로 넘깁니다.",
-  "AI로 IA·정책 초안을 정리하고 동작하는 화면을 먼저 만들어, 기획~프론트를 3주에서 1주로 줄였습니다 (PiMS Partners).",
+  "AI로 IA·정책 초안을 정리하고 동작하는 화면을 먼저 만들어, AI 없이 3주로 잡혀 있던 기획 일정을 1주로 줄였습니다 (PiMS Partners).",
   "VS Code에 노션·구글 드라이브·캘린더·리서치 툴을 MCP로 연결해 한곳에서 일하고, 이 포트폴리오도 AI 코딩 도구로 직접 만들었습니다.",
 ];
 
@@ -18,9 +18,9 @@ export const AI_VARIANTS: Record<AiVariant, { title: string; lead: string; empha
     emphasis: "",
   },
   growth: {
-    title: "AI로 문제와 가설부터 정리합니다",
-    lead: "분석은 SQL로 직접 하고, AI는 무엇을 확인할지 먼저 정리하는 데 씁니다.",
-    emphasis: "Growth 관점: 문제 정의서 단계에서 사실과 가설, 기대 효과를 나눠 두어 무엇을 데이터로 확인할지 먼저 정합니다.",
+    title: "반복 작업은 AI가, 판단은 제가 합니다",
+    lead: "회의록부터 QA까지 반복되는 작성·공유·실행은 AI가 처리하고, 검토와 확정은 직접 합니다.",
+    emphasis: "",
   },
   logistics: {
     title: "AI로 운영 이슈를 정책과 요구사항으로 옮깁니다",
@@ -33,6 +33,38 @@ export const AI_VARIANTS: Record<AiVariant, { title: string; lead: string; empha
     emphasis: "SaaS 관점: 운영기획서 초안에 역할·권한·상태값을 먼저 정의하고, 기획자가 정책 모순을 확인한 뒤에 화면으로 넘깁니다.",
   },
 };
+
+// 커머스 포트폴리오(3쪽) 기준: 반복 작업은 AI가, 판단은 기획자가 (/growth에서 사용)
+export const AI_ROWS = [
+  { task: "회의록 정리·공유", ai: "작성 → 요약 → 노션 저장 → 메일 발송", tools: ["Claude", "Notion", "Gmail"], decide: "합의 내용이 맞는지 확인" },
+  {
+    task: "정책 회의 준비",
+    ai: "회의록으로 안건 작성 → 공유 → 캘린더 초대",
+    note: "↻ 회의 후 ①부터 반복",
+    tools: ["Claude", "Notion", "Calendar"],
+    decide: "안건 우선순위 확정",
+  },
+  { task: "기획서 작성", ai: "두 AI가 토론하며 빈틈을 검증", tools: ["Claude", "GPT"], decide: "정책 누락·모순 최종 확정" },
+  { task: "프로토타입 생성", ai: "바이브코딩으로 동작하는 화면 제작", tools: ["Claude Code", "VS Code"], decide: "사용 흐름·예외 화면 확인" },
+  { task: "QA 시나리오·실행", ai: "시나리오 작성 → 자동 테스트", tools: ["Claude Code"], decide: "결과 판정 · 배포 결정" },
+];
+
+export const AI_CORE = ["AI Agent 자동화", "MCP 연동", "바이브코딩", "자동 QA"];
+
+export const AI_TOOLS = [
+  { name: "Claude", use: "기획 초안·프로토타입" },
+  { name: "GPT", use: "리서치·교차 검증" },
+  { name: "Notion", use: "문서·협업" },
+  { name: "Figma", use: "화면 설계" },
+  { name: "SQL", use: "데이터 추출·분석" },
+  { name: "GA4", use: "GAIQ · 퍼널 분석" },
+  { name: "VS Code", use: "AI 코딩 환경" },
+  { name: "Vercel", use: "프로토타입 배포" },
+  { name: "Microsoft", use: "Excel·PPT·Word" },
+  { name: "English", use: "캐나다 고교·통번역" },
+];
+
+export const AI_OUTPUTS = "회의록 · 운영 정책서 · 기능명세서 · 프로토타입 · 유저 플로우 · IA";
 
 export const AI_DIAGRAM = {
   src: "/work/ai-workflow/workflow.png",

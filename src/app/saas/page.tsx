@@ -54,13 +54,13 @@ export default function SaasHome() {
             <div className={styles.proofHead}>
               <div>
                 <p id="proof-title" className={styles.proofTitle}>
-                  잔여배차 공고 1건 처리 시간
+                  잔여배차 지원자 1명 처리 시간
                 </p>
                 <p className={styles.proofSub}>운영 백오피스 반자동화 · 딜리버스</p>
               </div>
               <Badge tone="measured">실측 · 월 환산</Badge>
             </div>
-            <p className={styles.proofBig}>월 266시간↓</p>
+            <p className={styles.proofBig}>월 약 266시간↓</p>
             <ul className={styles.proofBars}>
               {proof.map((p, i) => (
                 <li key={p.label}>
@@ -78,8 +78,8 @@ export default function SaasHome() {
               ))}
             </ul>
             <figcaption className={styles.proofNote}>
-              9월 물량(화이트 지원 인원 2,458명) 기준, 건당 평균 3.5분으로 잡으면 기존 10분 대비 월 약 266시간의 운영
-              공수를 줄인 셈입니다. 하루 운영자 1명분 이상의 업무 시간입니다.
+              9월 지원 인원(1·2차 지역 합계 2,458명) × 1명당 평균 6.5분 절감(1차 7분 · 2차 6분 평균)으로 환산하면, 월 약 266시간의 운영
+              공수를 줄인 셈입니다. 하루 운영자 1명분 이상(약 8.9시간)의 업무 시간입니다.
             </figcaption>
           </figure>
         </section>
