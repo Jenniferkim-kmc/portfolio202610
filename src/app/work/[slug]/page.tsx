@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import CaseStudy from "@/components/CaseStudy";
-import Footer from "@/components/coupang/Footer";
-import Header from "@/components/coupang/Header";
-import styles from "@/components/coupang/coupang.module.css";
+import GrowthCase from "@/components/growth/GrowthCase";
 import { allProjects, getAnyProject } from "@/data/allProjects";
-import { BASE, CLOSING, LINKS, rootProjects } from "@/data/rootContent";
+import { siteCase } from "@/data/caseAdapter";
+import { BASE, CLOSING, getRootFeature, rootProjects } from "@/data/rootContent";
 
 export const dynamicParams = false;
 
@@ -16,9 +14,7 @@ export function generateStaticParams() {
   return caseStudies.map((project) => ({ slug: project.slug }));
 }
 
-export async function generateMetadata({
-  params,
-}: PageProps<"/work/[slug]">): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps<"/work/[slug]">): Promise<Metadata> {
   const { slug } = await params;
   const project = getAnyProject(slug);
   if (!project) return {};
@@ -28,20 +24,11 @@ export async function generateMetadata({
   };
 }
 
-export default async function WorkDetail({
-  params,
-}: PageProps<"/work/[slug]">) {
+export default async function WorkDetail({ params }: PageProps<"/work/[slug]">) {
   const { slug } = await params;
-  const project = getAnyProject(slug);
-  if (!project?.detail) notFound();
+  const found = siteCase(slug, rootProjects, caseStudies, getRootFeature);
+  if (!found) notFound();
   return (
-    <div className={`${styles.root} flex flex-1 flex-col`}>
-      <CaseStudy
-        project={{ ...project, detail: project.detail }}
-        caseStudies={rootProjects}
-        nav={<Header base={BASE} links={LINKS} />}
-        footer={<Footer {...CLOSING} />}
-      />
-    </div>
+    <GrowthCase data={found.data} base={BASE} others={found.others} footer={{ ...CLOSING, role: "Product Manager" }} />
   );
 }

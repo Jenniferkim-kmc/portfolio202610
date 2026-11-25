@@ -8,8 +8,8 @@ export const BASE = "/logistics";
 
 // 푸터 위 마무리 문장 (기존 /logistics 푸터 문구)
 export const CLOSING = {
-  title: ["다음 임팩트는", "함께 만들고 싶습니다."] as [string, string],
-  text: "귀사와 함께하는 여정을 기대합니다.",
+  variant: "bold" as const,
+  title: ["물류 현장의 수기 업무를 시스템으로 바꿔,", "운영 공수를 줄이고 회사의 이익으로 돌려드리겠습니다"] as [string, string],
 };
 
 // 기존 /logistics Selected Work 순서
@@ -17,9 +17,9 @@ export const features: Feature[] = [
   {
     slug: "dispatch-automation",
     type: "운영 시스템 기획 · 백오피스·라이더 앱",
-    team: "배차 라이더앱, 백오피스 개선",
+    team: "딜리버스 · 1인 기획",
     problem:
-      "물량이 늘어도 운영 인원을 늘릴 수 없어, 지원자 1명을 처리하는 데 드는 시간 자체를 줄여야 했습니다.",
+      "물량이 늘어도 운영 인원을 늘릴 수 없어, 판단이 필요 없는 단계를 반자동화해 지원자 1명당 처리 시간을 10분에서 3~4분으로 줄였습니다.",
     contributions: [
       "수기 6~7단계 구인 프로세스를 분해해 판단이 필요 없는 구간을 자동화 대상으로 정의",
       "블루 지역은 운송사 신청 + 운영자 승인 구조로 바꾸고 단가·프로모션은 운영자가 관리",
@@ -39,7 +39,7 @@ export const features: Feature[] = [
   {
     slug: "daytime-delivery",
     type: "0→1 신규 서비스 · 앱·어드민·TMS",
-    team: "라이더앱, 백오피스, TMS 개선",
+    team: "딜리버스 · 1인 기획",
     problem:
       "늘어나는 미배송을 회차·사유별로 나눠 보니, 새벽배송 미배송의 대부분은 낮에는 풀리는 출입 문제였습니다.",
     contributions: [
@@ -67,11 +67,11 @@ export const features: Feature[] = [
   {
     slug: "entrance-ux",
     type: "데이터 기반 문제 해결 · 라이더 앱",
-    team: "라이더 앱 (딜리래빗) 개선",
+    team: "딜리버스 · 1인 기획",
     problem:
-      "‘기능이 없다’는 VOC를 데이터로 다시 보니, 원인은 이미 있는 출입 정보가 보이지 않는 것이었습니다.",
+      "‘기능이 없다’는 VOC를 데이터로 다시 보니 원인은 이미 있는 출입 정보가 보이지 않는 것이었고, 출입 정보를 주소 바로 아래로 옮겨 배송 1만 건당 출입 불가 미배송을 9.91건에서 4.54건으로 54.2% 줄였습니다.",
     contributions: [
-      "미배송 사유를 집계해 2026.07.01 미배송 51건 중 22건(43%)이 공동현관 비밀번호임을 특정",
+      "미배송 사유를 집계해 6월 한 달 미배송 약 1,530건 중 약 660건(43%)이 공동현관 비밀번호임을 특정",
       "4개 경로의 비밀번호를 우선순위대로 골라 카드 상단에 노출하도록 설계",
       "배포 후 지표 변화가 없자 주소 데이터 매핑 오류를 찾아 화주사·개발팀에 수정 요청",
     ],
@@ -98,7 +98,7 @@ export function getLogisticsFeature(slug: string) {
   return features.find((feature) => feature.slug === slug);
 }
 
-// 카드 순서대로 상세 복사본(시스템 흐름·지표 설계 추가)을 정렬
+// 카드 순서대로 상세 복사본(시스템 흐름 추가)을 정렬
 export const logisticsProjects: Project[] = features
   .map((feature) => logisticsDetails.find((project) => project.slug === feature.slug))
   .filter((project): project is Project => Boolean(project?.detail));

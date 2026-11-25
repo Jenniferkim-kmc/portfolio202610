@@ -1,10 +1,13 @@
 import Link from "next/link";
 import CountUp from "@/components/growth/CountUp";
 import GrowthCaseNav from "@/components/growth/GrowthCaseNav";
-import GrowthFooter from "@/components/growth/GrowthFooter";
+import GrowthFooter, { type FooterProps } from "@/components/growth/GrowthFooter";
 import GrowthHeader from "@/components/growth/GrowthHeader";
 import GrowthReveal from "@/components/growth/GrowthReveal";
 import ZoomableImage from "@/components/ZoomableImage";
+import CompareBars from "@/components/CompareBars";
+import DailyBarChart from "@/components/DailyBarChart";
+import GroupedBars from "@/components/GroupedBars";
 import type { CaseBlock, CaseImage, GrowthCase as Case } from "@/data/growthCase";
 import { growthCases } from "@/data/growthCase";
 import gs from "@/app/growth/growth.module.css";
@@ -366,7 +369,28 @@ function Block({ b }: { b: CaseBlock }) {
       return (
         <div className={s.block}>
           {head}
-          {b.layout === "phones" ? (
+          {b.layout === "gallery" ? (
+            <ol className={s.gallery}>
+              {b.items.map((img, i) => {
+                const cap = img.cap ?? "";
+                const cut = cap.indexOf(":");
+                const title = cut > 0 ? cap.slice(0, cut).trim() : cap;
+                const desc = cut > 0 ? cap.slice(cut + 1).trim() : "";
+                return (
+                  <li key={img.src}>
+                    <Shot img={{ ...img, cap: undefined }} sizes="(max-width: 640px) 45vw, 240px" />
+                    <p className={s.galCap}>
+                      <b>
+                        <span className={s.galNum}>{String(i + 1).padStart(2, "0")}</span>
+                        {title}
+                      </b>
+                      {desc && <span>{desc}</span>}
+                    </p>
+                  </li>
+                );
+              })}
+            </ol>
+          ) : b.layout === "phones" ? (
             <div className={s.phoneRow}>
               {b.points && <Points items={b.points} />}
               <div className={s.baPhones}>
@@ -412,20 +436,73 @@ function Block({ b }: { b: CaseBlock }) {
           ))}
         </div>
       );
+    case "steps":
+      return (
+        <div className={`${s.block} ${s.steps}`}>
+          {[b.before, b.after].map((col, c) => (
+            <div key={col.tag + c} className={`${s.stepsCol} ${c === 1 ? s.stepsAfter : ""}`}>
+              <p className={s.stepsHead}>
+                <span className={`${s.tag} ${c === 0 ? s.tagGray : ""}`}>{col.tag}</span>
+                {col.title}
+              </p>
+              <ol className={s.stepsList}>
+                {col.steps.map((st, i) => (
+                  <li key={st.text}>
+                    <span className={s.stepsNum}>{i + 1}</span>
+                    <span>{st.text}</span>
+                    {st.auto && <span className={s.stepsAuto}>자동</span>}
+                  </li>
+                ))}
+              </ol>
+            </div>
+          ))}
+        </div>
+      );
+    case "text":
+      return (
+        <div className={s.block}>
+          {head}
+          {b.points && <Points items={b.points} />}
+        </div>
+      );
+    case "chart":
+      return (
+        <div className={s.block}>
+          {head}
+          {b.daily && <DailyBarChart chart={b.daily} />}
+          {b.compare && <CompareBars chart={b.compare} />}
+          {b.grouped && <GroupedBars chart={b.grouped} />}
+        </div>
+      );
   }
 }
 
-export default function GrowthCase({ data }: { data: Case }) {
-  const others = growthCases.filter((c) => c.slug !== data.slug);
+type Other = { slug: string; kicker: string; title: [string, string] };
+
+// base: 이 상세 페이지가 속한 사이트("/growth", "/saas", "/logistics", "/")
+export default function GrowthCase({
+  data,
+  base = "/growth",
+  others: othersProp,
+  footer,
+}: {
+  data: Case;
+  base?: string;
+  others?: Other[];
+  footer?: FooterProps;
+}) {
+  const others: Other[] = (othersProp ?? growthCases).filter((c) => c.slug !== data.slug);
+  const root = base === "/" ? "" : base;
+  const workHref = root ? `${root}#work` : "/#work";
   return (
     <div className={`${gs.root} ${s.page}`}>
       <GrowthReveal />
-      <GrowthHeader />
+      <GrowthHeader base={base} />
 
       <main id="main">
         {/* 히어로: 무엇을 했고, 어떤 성과인지 */}
         <section className={s.hero}>
-          <Link href="/growth#work" className={s.back}>
+          <Link href={workHref} className={s.back}>
             ← 대표 프로젝트
           </Link>
           <span className={gs.badge}>{data.kicker}</span>
@@ -517,7 +594,7 @@ export default function GrowthCase({ data }: { data: Case }) {
           <p className={s.nextLabel}>다른 프로젝트</p>
           <div className={s.nextGrid}>
             {others.map((o) => (
-              <Link key={o.slug} href={`/growth/work/${o.slug}`} className={s.nextCard}>
+              <Link key={o.slug} href={`${root}/work/${o.slug}`} className={s.nextCard}>
                 <span className={s.nextKicker}>{o.kicker}</span>
                 <span className={s.nextTitle}>
                   {o.title[0]} {o.title[1]}
@@ -526,13 +603,13 @@ export default function GrowthCase({ data }: { data: Case }) {
               </Link>
             ))}
           </div>
-          <Link href="/growth#work" className={s.back}>
+          <Link href={workHref} className={s.back}>
             ← 대표 프로젝트로 돌아가기
           </Link>
         </section>
       </main>
 
-      <GrowthFooter />
+      <GrowthFooter variant="bold" {...footer} />
     </div>
   );
 }

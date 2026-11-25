@@ -1,7 +1,9 @@
 // /growth 상세 페이지 내용: 커머스 포트폴리오 PDF(포트폴리오_김유정_커머스.pdf) 문구 기준
 // 30초 스키밍 구조: 히어로(무엇·성과) → 30초 요약(문제·해결·결과) → 본문 섹션
 
-export type CaseImage = { src: string; w: number; h: number; alt: string; cap?: string };
+import type { CompareChart, DailyChart, GroupedChart } from "@/data/projects";
+
+export type CaseImage ={ src: string; w: number; h: number; alt: string; cap?: string };
 
 export type CaseKpi = {
   value: string;
@@ -80,16 +82,28 @@ export type CaseBlock =
       items: (CaseImage & { tag: string; title: string; points: string[] })[];
     })
   | (BlockHead & { type: "compare"; head: string[]; rows: string[][]; note?: string })
-  | (BlockHead & { type: "figures"; layout?: "wide" | "phones"; items: CaseImage[]; points?: string[] })
+  /** gallery: 폰 화면 3장 이상을 같은 크기 4열로 (캡션 "제목: 설명"을 번호·제목·설명으로 나눠 표시) */
+  | (BlockHead & { type: "figures"; layout?: "wide" | "phones" | "gallery"; items: CaseImage[]; points?: string[] })
+  | (BlockHead & {
+      /** 전후 프로세스: Before · After를 좌우 두 열의 세로 번호 리스트로 */
+      type: "steps";
+      before: StepsCol;
+      after: StepsCol;
+    })
   | (BlockHead & { type: "note" })
   | (BlockHead & {
       /** 전후 구조도: 처음 구조 → 바뀐 구조를 노드와 화살표로 */
       type: "structure";
       before: StructureRow;
       after: StructureRow;
-    });
+    })
+  /** 다른 사이트 프로젝트(projects.ts)를 옮길 때 쓰는 글·차트 블록 */
+  | (BlockHead & { type: "text"; points?: string[] })
+  | (BlockHead & { type: "chart"; daily?: DailyChart; compare?: CompareChart; grouped?: GroupedChart });
 
-export type StructureRow = { label: string; nodes: { tag: string; title: string; accent?: boolean }[] };
+export type StepsCol = { tag: string; title: string; steps: { text: string; auto?: boolean }[] };
+
+export type StructureRow ={ label: string; nodes: { tag: string; title: string; accent?: boolean }[] };
 
 export type CaseSection = {
   id: string;
@@ -603,7 +617,7 @@ const daytime: GrowthCase = {
   slug: "daytime-delivery",
   kicker: "03 · 신규 서비스 기획 · 딜리버스",
   title: ["네이버 제휴 미배송 재매칭", "서비스 “낮배송” 0→1"],
-  lede: "미배송된 물량을 낮 시간대에 다시 배차하는 서비스를 라이더 앱, 운영 어드민, 관제 대시보드(TMS)까지 단독 설계했습니다.",
+  lede: "미배송된 물량을 낮 시간대에 다시 배차하는 서비스를 라이더 앱, 운영 어드민, 관제 대시보드(TMS)까지 1인 기획으로 설계했습니다.",
   kpis: [
     { value: "82.5%", count: { from: 0, to: 82.5, decimals: 1, suffix: "%" }, label: "배차 매칭률", basis: "공고 622건 중 513건" },
     { value: "100%", count: { from: 0, to: 100, suffix: "%" }, label: "배차 확정 건 재배송 완료율", basis: "확정 513건 모두 배송 완료" },
@@ -611,7 +625,7 @@ const daytime: GrowthCase = {
   ],
   kpiNote: "릴리즈 17일(2026.10.26 ~ 11.11) 운영 데이터",
   meta: [
-    { k: "역할", v: "서비스기획 (0→1 단독 설계)" },
+    { k: "역할", v: "서비스기획 (0→1 1인 기획)" },
     { k: "기여도", v: "기획 100%" },
     { k: "기간", v: "2026.08.01 — 2026.09.15 (2026.10.26 릴리즈)" },
     { k: "범위", v: "라이더 앱(딜리래빗) · 운영 어드민 · 관제 대시보드(TMS)" },

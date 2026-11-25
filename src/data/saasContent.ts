@@ -12,17 +12,17 @@ import type { Project } from "@/data/projects";
 export const BASE = "/saas";
 
 export const CLOSING = {
-  title: ["반복되는 운영을 줄이는 제품을,", "함께 만들고 싶습니다."] as [string, string],
-  text: "SQL로 병목을 찾고, 기준은 정책으로, 반복은 시스템으로 바꾸고, 결과는 숫자로 확인하겠습니다.",
+  variant: "bold" as const,
+  title: ["수기로 반복되던 운영 업무를 자동화해,", "운영 공수를 줄이고 회사의 이익으로 만들겠습니다"] as [string, string],
 };
 
 export const features: Feature[] = [
   {
     slug: "dispatch-automation",
     type: "운영 자동화 · 백오피스·파트너 셀프 등록",
-    team: "운영 백오피스·라이더 앱 개선",
+    team: "딜리버스 · 1인 기획",
     problem:
-      "구인 한 건마다 구글시트·구글폼·채널톡·슬랙을 오가며 운영자가 6~7단계를 손으로 처리했고, 건당 약 10분이 걸렸습니다.",
+      "구인 한 건마다 구글시트·구글폼·채널톡·슬랙을 오가며 운영자가 6~7단계를 손으로 처리해 건당 약 10분이 걸리던 업무를, 판단이 필요 없는 구간부터 반자동화해 4단계·건당 3~4분으로 줄였습니다.",
     contributions: [
       "운영 프로세스를 단계별로 분해해 지원자 확인·개별 연락·수기 배차를 자동화 대상으로 정의",
       "파트너(운송사)가 직접 공고를 등록하고 운영자가 승인하는 구조로 중계 업무 제거, 단가·프로모션 권한은 운영자에게 유지",
@@ -42,7 +42,7 @@ export const features: Feature[] = [
   {
     slug: "pims-partners",
     type: "B2B 파트너 어드민 0→1 · RBAC·정산",
-    team: "파트너 어드민 1인 기획",
+    team: "애딥 · 1인 기획",
     problem:
       "셀러·벤더가 상품을 올리고 승인받아 정산받기까지 상태가 계속 바뀌고, 운영자마다 할 수 있는 일이 달라야 했습니다.",
     contributions: [
@@ -64,7 +64,7 @@ export const features: Feature[] = [
   {
     slug: "daytime-delivery",
     type: "규칙 기반 자동화 · 운영 어드민·TMS",
-    team: "라이더앱, 백오피스, TMS 개선",
+    team: "딜리버스 · 1인 기획",
     problem:
       "미배송 건을 다시 배송하려면 운영팀이 물품마다 사유 확인·후속 절차·실물 확인·회차 전환을 손으로 거쳐야 했습니다.",
     contributions: [
@@ -86,9 +86,9 @@ export const features: Feature[] = [
   {
     slug: "entrance-ux",
     type: "SQL 분석 · 데이터 기반 개선",
-    team: "라이더 앱 (딜리래빗) 개선",
+    team: "딜리버스 · 1인 기획",
     problem:
-      "‘기능이 없다’는 VOC를 SQL로 다시 보니, 원인은 이미 있는 정보가 보이지 않는 것이었습니다.",
+      "‘기능이 없다’는 VOC를 SQL로 다시 보니 원인은 이미 있는 정보가 보이지 않는 것이었고, 출입 정보를 주소 바로 아래로 옮겨 배송 1만 건당 출입 불가 미배송을 9.91건에서 4.54건으로 54.2% 줄였습니다.",
     contributions: [
       "미배송 사유를 SQL로 집계해 원인의 43%가 출입 정보 부재임을 특정",
       "물량 증가 효과를 뺀 1만 건당 지표로 개선 효과를 검증",
@@ -111,7 +111,7 @@ export function getSaasFeature(slug: string) {
   return features.find((feature) => feature.slug === slug);
 }
 
-// 딜리버스 프로젝트는 시스템 흐름·지표 설계 표가 추가된 /logistics 복사본, PiMS는 원본을 사용
+// 딜리버스 프로젝트는 시스템 흐름 표가 추가된 /logistics 복사본, PiMS는 원본을 사용
 export const saasProjects: Project[] = features
   .map(
     (feature) =>

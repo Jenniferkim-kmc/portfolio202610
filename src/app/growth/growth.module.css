@@ -966,6 +966,206 @@
   color: var(--ink);
 }
 
+/* 마무리 섹션 (bold): 짙은 남색 위에 한 문장 + 연락. 위 본문 숫자는 반복하지 않음 */
+.closing {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  flex: 0 0 auto;
+  align-self: stretch;
+  overflow: hidden;
+  background: #0b1424;
+  color: #fff;
+}
+
+.closing::before {
+  content: "";
+  position: absolute;
+  inset: -40% -10% auto;
+  height: 120%;
+  background: radial-gradient(closest-side, rgba(49, 130, 246, 0.32), transparent 70%);
+  pointer-events: none;
+}
+
+/* 웹 형식: 넓은 화면에서는 왼쪽 문장 · 오른쪽 연락 버튼, 좁은 화면에서는 위아래 */
+.closingInner {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(88px, 10vw, 136px) clamp(24px, 5vw, 56px) clamp(72px, 8vw, 104px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 40px;
+  align-items: end;
+  text-align: left;
+}
+
+.closingText {
+  min-width: 0;
+}
+
+
+.closingStatus {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #dfe6f1;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.closingStatus i {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #34d399;
+}
+
+.closingStatus i::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #34d399;
+  animation: closingPulse 1.8s ease-out infinite;
+}
+
+@keyframes closingPulse {
+  from {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  to {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .closingStatus i::after {
+    animation: none;
+  }
+}
+
+.closingTitle {
+  margin: 28px 0 0;
+  font-size: clamp(24px, 3.4vw, 44px);
+  font-weight: 800;
+  line-height: 1.32;
+  letter-spacing: -0.035em;
+  color: #fff;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+/* 두 줄을 각각 한 덩어리로: 넓은 화면에서는 줄마다 한 줄로 */
+.closingTitle span {
+  display: block;
+}
+
+.closingTitle .closingAccent {
+  color: #6aa8ff;
+}
+
+.closingSign {
+  margin: 24px 0 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #8c9ab0;
+}
+
+.closingActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+
+.closingBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 60px;
+  padding: 0 32px;
+  border-radius: 10px;
+  background: var(--blue);
+  color: #fff !important;
+  font-size: 18px;
+  font-weight: 800;
+  box-shadow: 0 12px 32px rgba(49, 130, 246, 0.35);
+  transition: background-color 150ms, transform 100ms;
+}
+
+.closingBtn svg {
+  transition: transform 150ms;
+}
+
+.closingBtn:hover {
+  background: #1b64da;
+}
+
+.closingBtn:hover svg {
+  transform: translateX(3px);
+}
+
+.closingBtn:active {
+  transform: scale(0.97);
+}
+
+.closingBtnGhost {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow: none;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.closingBtnGhost:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.closingFoot {
+  position: relative;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  box-sizing: border-box;
+  padding: 24px clamp(24px, 5vw, 56px) 32px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-size: 14px;
+  color: #8c9ab0;
+}
+
+.closingFoot p {
+  margin: 0;
+}
+
+.closingFoot b {
+  color: #dfe6f1;
+}
+
+.closingFoot a:hover {
+  color: #fff;
+}
+
+@media (max-width: 720px) {
+  .closingBtn {
+    width: 100%;
+  }
+}
+
 
 /* 대표 프로젝트 카드: 왼쪽 요약·근거, 오른쪽 화면 (/coupang 카드와 같은 형식) */
 .projects {

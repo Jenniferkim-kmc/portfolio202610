@@ -23,8 +23,11 @@ const companyLinks = [
 // 상세 페이지에서는 앵커 앞에 base(예: /growth, /viver)를 붙여 메인으로 이동
 export default function GrowthHeader({ home = false, base = "/growth" }: { home?: boolean; base?: string }) {
   const [open, setOpen] = useState(false);
-  const prefix = home ? "" : base;
-  const links = base === "/growth" ? growthLinks : companyLinks;
+  // 루트("/")는 "/#how", "/print"처럼 슬래시가 두 번 붙지 않게 처리
+  const root = base === "/" ? "" : base;
+  const prefix = home ? "" : root || "/";
+  // 공용 포트폴리오(/growth, /, /saas, /logistics)는 자기소개 메뉴, 회사별 페이지는 기존 메뉴
+  const links = ["/growth", "/", "/saas", "/logistics"].includes(base) ? growthLinks : companyLinks;
 
   useEffect(() => {
     if (!open) return;
@@ -47,7 +50,7 @@ export default function GrowthHeader({ home = false, base = "/growth" }: { home?
           ))}
         </nav>
         <div className={styles.gnbRight}>
-          <PrintButton href={`${base}/print`} className={styles.printBtn} />
+          <PrintButton href={`${root}/print`} className={styles.printBtn} />
           <a href={`mailto:${EMAIL}`} className={`${styles.btn} ${styles.btnSmall} ${styles.gnbMail}`}>
             메일 보내기
           </a>

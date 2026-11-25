@@ -1236,8 +1236,144 @@
   color: var(--ink);
 }
 
+/* 전후 프로세스: 좌우 두 열, 열 안은 세로 번호 리스트 (행 대응을 암시하지 않게 열 높이는 각자) */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  align-items: start;
+}
+
+.stepsCol {
+  padding: 22px 24px 10px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+}
+
+.stepsAfter {
+  border-color: var(--blue);
+}
+
+.stepsHead {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 8px;
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.stepsList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.stepsList li {
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: 12px;
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--ink);
+}
+
+.stepsList li:first-child {
+  border-top: 0;
+}
+
+.stepsNum {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gray);
+}
+
+.stepsAfter .stepsNum {
+  border-color: var(--blue-soft);
+  background: var(--blue-soft);
+  color: var(--blue);
+}
+
+.stepsAuto {
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: var(--blue-soft);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--blue);
+  white-space: nowrap;
+}
+
+/* 폰 화면 갤러리: 장 수와 상관없이 같은 크기 4열 */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px 16px;
+  align-items: start;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* 원본 세로 길이가 조금씩 달라도 화면 높이를 맞춘다 (위쪽 기준으로 아래 몇 px만 잘림) */
+.gallery .frame {
+  aspect-ratio: 375 / 812;
+  min-height: 0;
+}
+
+.gallery .frame > * {
+  height: 100%;
+}
+
+.gallery .frame img {
+  height: 100% !important;
+  object-fit: cover;
+  object-position: top;
+}
+
+.galCap {
+  display: grid;
+  gap: 4px;
+  margin: 12px 0 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--gray);
+}
+
+.galCap b {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.galNum {
+  margin-right: 6px;
+  color: var(--blue);
+}
+
 /* ---------- 반응형 ---------- */
 @media (max-width: 900px) {
+  .steps {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .stepsCol {
+    padding: 18px 18px 6px;
+  }
+
   .stRow {
     grid-template-columns: minmax(0, 1fr);
     gap: 12px;
@@ -1303,6 +1439,15 @@
 }
 
 @media (max-width: 640px) {
+  .gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px 12px;
+  }
+
+  .stepsList li {
+    font-size: 15px;
+  }
+
   .kpi,
   .stat,
   .card,

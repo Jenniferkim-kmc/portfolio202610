@@ -182,7 +182,7 @@ export default function GrowthHome() {
         <GrowthAiSection variant="growth" grey />
       </main>
 
-      <GrowthFooter />
+      <GrowthFooter variant="bold" />
     </div>
   );
 }
