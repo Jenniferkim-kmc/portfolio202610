@@ -5,7 +5,7 @@ export type FooterProps = {
   title?: [string, string];
   text?: string;
   role?: string;
-  // bold: 짙은 남색 마무리 섹션 (/growth, /, /b2b, /logistics). 기본값은 기존 연한 파랑.
+  // bold: 짙은 남색 마무리 섹션 (/growth, /, /system, /logistics). 기본값은 기존 연한 파랑.
   variant?: "soft" | "bold";
   // bold 전용 색: light(기본, 히어로 파랑 — 전 사이트 통일) · dark(짙은 남색, 예비)
   tone?: "dark" | "light";

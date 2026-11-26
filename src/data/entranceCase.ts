@@ -1,4 +1,4 @@
-// 공동현관 UI/UX 개선 — /, /b2b, /logistics 전용 상세(손으로 쓴 케이스). /growth 목록에는 넣지 않는다.
+// 공동현관 UI/UX 개선 — /, /system, /logistics 전용 상세(손으로 쓴 케이스). /growth 목록에는 넣지 않는다.
 // 원본 수치·문구: src/data/projects.ts entrance-ux. 새 숫자를 만들지 않음.
 import type { GrowthCase } from "@/data/growthCase";
 

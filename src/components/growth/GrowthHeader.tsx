@@ -26,8 +26,8 @@ export default function GrowthHeader({ home = false, base = "/growth" }: { home?
   // 루트("/")는 "/#how", "/print"처럼 슬래시가 두 번 붙지 않게 처리
   const root = base === "/" ? "" : base;
   const prefix = home ? "" : root || "/";
-  // 공용 포트폴리오(/growth, /, /b2b, /logistics)는 자기소개 메뉴, 회사별 페이지는 기존 메뉴
-  const links = ["/growth", "/", "/b2b", "/logistics"].includes(base) ? growthLinks : companyLinks;
+  // 공용 포트폴리오(/growth, /, /system, /logistics)는 자기소개 메뉴, 회사별 페이지는 기존 메뉴
+  const links = ["/growth", "/", "/system", "/logistics"].includes(base) ? growthLinks : companyLinks;
 
   useEffect(() => {
     if (!open) return;

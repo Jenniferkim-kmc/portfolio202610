@@ -117,7 +117,7 @@ export const archivedGrowthProjects: Project[] = [
   },
 ];
 
-// 다른 포트폴리오(/, /b2b, /logistics 등)가 allProjects로 쓰는 PiMS 원본.
+// 다른 포트폴리오(/, /system, /logistics 등)가 allProjects로 쓰는 PiMS 원본.
 // /growth는 아래 growthProjects의 커머스 버전(공동구매·셀러 중심)을 씀.
 export const sharedPims: Project = {
     slug: "pims-partners",

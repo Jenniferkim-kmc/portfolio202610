@@ -1,5 +1,5 @@
 // projects.ts 형식(Detail)을 /growth 상세 페이지 형식(GrowthCase)으로 바꾼다.
-// /, /b2b, /logistics 상세 페이지가 /growth와 같은 틀을 쓰게 하려는 용도.
+// /, /system, /logistics 상세 페이지가 /growth와 같은 틀을 쓰게 하려는 용도.
 
 import { getGrowthFeature, type GrowthFeature } from "@/data/growthContent";
 import { getGrowthCase, type CaseBlock, type CaseImage, type CaseSection, type GrowthCase } from "@/data/growthCase";

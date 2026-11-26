@@ -2,17 +2,17 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import GrowthCase from "@/components/growth/GrowthCase";
 import { siteCase } from "@/data/caseAdapter";
-import { BASE, CLOSING, getB2bFeature, getB2bProject, b2bProjects } from "@/data/b2bContent";
+import { BASE, CLOSING, getSystemFeature, getSystemProject, systemProjects } from "@/data/systemContent";
 
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return b2bProjects.map((project) => ({ slug: project.slug }));
+  return systemProjects.map((project) => ({ slug: project.slug }));
 }
 
-export async function generateMetadata({ params }: PageProps<"/b2b/work/[slug]">): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps<"/system/work/[slug]">): Promise<Metadata> {
   const { slug } = await params;
-  const project = getB2bProject(slug);
+  const project = getSystemProject(slug);
   if (!project) return {};
   return {
     title: `${project.title} — 김유정 (Jennifer Kim)`,
@@ -20,16 +20,16 @@ export async function generateMetadata({ params }: PageProps<"/b2b/work/[slug]">
   };
 }
 
-export default async function B2bWorkDetail({ params }: PageProps<"/b2b/work/[slug]">) {
+export default async function SystemWorkDetail({ params }: PageProps<"/system/work/[slug]">) {
   const { slug } = await params;
-  const found = siteCase(slug, b2bProjects, b2bProjects, getB2bFeature);
+  const found = siteCase(slug, systemProjects, systemProjects, getSystemFeature);
   if (!found) notFound();
   return (
     <GrowthCase
       data={found.data}
       base={BASE}
       others={found.others}
-      footer={{ ...CLOSING, role: "B2B Product Manager" }}
+      footer={{ ...CLOSING, role: "시스템 기획자" }}
     />
   );
 }
